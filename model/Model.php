@@ -6,6 +6,9 @@
  * Time: 11:21
  */
 
+require('../lib/File.php');
+require (File::build_path(array('config','Conf.php')));
+
 class Model
 {
 
