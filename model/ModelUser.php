@@ -79,9 +79,11 @@ class ModelUser
 
     public function __construct($id=null,$mail=null,$password=null)
     {
-        $this->idUser=$id;
-        $this->mailUser=$mail;
-        $this->passwordUser=$password;
+        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+            $this->idUser = $id;
+            $this->mailUser = $mail;
+            $this->passwordUser = $password; //TODO crypter mdp
+        }
     }
 
     public static function getAllUsers() {
