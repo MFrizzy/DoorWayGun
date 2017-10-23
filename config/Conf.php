@@ -10,18 +10,10 @@ class Conf
 {
 
     static private $databases = array(
-        // Le nom d'hote est webinfo a l'IUT
-        // ou localhost sur votre machine
-        'hostname' => 'webinfo.iutmontp.univ-montp2.fr', //TODO
-        // A l'IUT, vous avez une BDD nommee comme votre login
-        // Sur votre machine, vous devrez creer une BDD
-        'database' => 'ducreta', //TODO
-        // A l'IUT, c'est votre login
-        // Sur votre machine, vous avez surement un compte 'root'
-        'login' => 'ducreta', //TODO
-        // A l'IUT, c'est votre mdp (INE par defaut)
-        // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => 'paceword' //TODO
+        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
+        'database' => 'ducreta',
+        'login' => 'ducreta',
+        'password' => 'paceword'
     );
 
     static private $debug = True;
