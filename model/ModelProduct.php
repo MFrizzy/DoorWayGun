@@ -6,11 +6,13 @@
  * Time: 08:23
  */
 
+require_once File::build_path(array('model','Model.php'));
+
 class ModelProduct extends Model
 {
 
-    protected static $object;
-    protected static $primary;
+    protected static $object = 'Product';
+    protected static $primary = 'idProduct';
 
     private $idProduct;
     private $productName;
@@ -24,12 +26,14 @@ class ModelProduct extends Model
      * @param $price
      * @param $description
      */
-    public function __construct($idProduct, $productName, $price, $description)
+    public function __construct($idProduct = NULL, $productName = NULL, $price = NULL, $description = NULL)
     {
-        $this->idProduct = $idProduct;
-        $this->productName = $productName;
-        $this->price = $price;
-        $this->description = $description;
+        if(!is_null($idProduct) && !is_null($productName) && !is_null($price) && !is_null($description)) {
+            $this->idProduct = $idProduct;
+            $this->productName = $productName;
+            $this->price = $price;
+            $this->description = $description;
+        }
     }
 
     /**

@@ -10,4 +10,4 @@ require_once File::build_path(array('controller','ControllerMain.php'));
 require_once File::build_path(array('controller','ControllerUser.php'));
 require_once File::build_path(array('controller','ControllerProduct.php'));
 
-if(!isset($_GET['controller']) && !isset($_GET['action'])) //ControllerProduct::
+if(!isset($_GET['controller']) && !isset($_GET['action'])) ControllerProduct::readAll();

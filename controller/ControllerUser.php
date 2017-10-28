@@ -6,6 +6,8 @@
  * Time: 09:59
  */
 
+require_once File::build_path(array('model','ModelUser.php'));
+
 class ControllerUser
 {
 

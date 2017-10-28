@@ -37,7 +37,10 @@ class Model
             $rep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$object));
             return $rep->fetchAll();
         }
-        catch (Exception $e) {return false;}
+        catch (Exception $e) {
+            //return false;
+            echo $e->getMessage();
+        }
     }
 
     public static function select($primary_value)
@@ -91,7 +94,7 @@ class Model
             foreach ($data as $cle => $element) {
                 $sql = $sql . $cle . ',';
             }
-            $sql = rtrim($sql,',') . ') VALUES (';
+            $sql = rtrim($sql,',') . ') VALUE (';
             foreach ($data as $cle => $element) {
                 $sql = $sql . ':'.$cle.',';
             }

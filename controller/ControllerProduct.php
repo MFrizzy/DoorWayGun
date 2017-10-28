@@ -6,6 +6,8 @@
  * Time: 09:59
  */
 
+require_once File::build_path(array('model','ModelProduct.php'));
+
 class ControllerProduct
 {
     protected static $object='product';

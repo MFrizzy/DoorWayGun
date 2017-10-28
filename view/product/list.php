@@ -6,3 +6,6 @@
  * Time: 10:08
  */
 
+foreach ($tab as $value){
+    echo '<p>'.htmlspecialchars($value->getIdProduct()).' : '.htmlspecialchars($value->getProductName());
+}

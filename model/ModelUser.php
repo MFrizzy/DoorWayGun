@@ -6,6 +6,8 @@
  * Time: 10:31
  */
 
+require_once File::build_path(array('model','Model.php'));
+
 class ModelUser extends Model
 {
     private $idUser;
@@ -79,7 +81,7 @@ class ModelUser extends Model
 
     public function __construct($id=null,$mail=null,$password=null)
     {
-        if (!is_null($m) && !is_null($c) && !is_null($i)) {
+        if (!is_null($id) && !is_null($mail) && !is_null($password)) {
             $this->idUser = $id;
             $this->mailUser = $mail;
             $this->passwordUser = $password; //TODO crypter mdp
