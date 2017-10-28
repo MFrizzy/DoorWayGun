@@ -6,7 +6,7 @@
  * Time: 08:23
  */
 
-class ModelProduct
+class ModelProduct extends Model
 {
 
     protected static $object;

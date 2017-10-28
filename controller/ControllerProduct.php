@@ -8,5 +8,13 @@
 
 class ControllerProduct
 {
+    protected static $object='product';
+    
+    public static function readAll() {
+        $tab=ModelProduct::selectAll();
+        $view='list';
+        $pagetitle='Accueil'; // pas sur
+        require_once File::build_path(array('view','view.php'));
+    }
 
 }
