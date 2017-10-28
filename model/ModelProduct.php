@@ -88,7 +88,7 @@ class ModelProduct
         return $this->idProduct;
     }
 
-    
+
 
 
 }
