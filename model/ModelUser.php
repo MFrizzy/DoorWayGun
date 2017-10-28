@@ -86,10 +86,4 @@ class ModelUser
         }
     }
 
-    public static function getAllUsers() {
-        $rep=Model::$pdo->query("SELECT * FROM Users");
-        $rep->setFetchMode(PDO::FETCH_CLASS,'ModelUser');
-        return $rep->fetchAll();
-    }
-
 }
