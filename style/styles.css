@@ -1,3 +1,7 @@
 body {
     display: flex;
 }
+
+.produit {
+    margin: 15px;
+}
