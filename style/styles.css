@@ -4,4 +4,6 @@ body {
 
 .produit {
     margin: 15px;
+    width: 512px;
+    height: 512px;
 }

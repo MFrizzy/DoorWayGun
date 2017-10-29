@@ -1,3 +1,6 @@
+
+<div style="display: flex">
+
 <?php
 /**
  * Created by PhpStorm.
@@ -8,7 +11,7 @@
 
 foreach ($tab as $value){
     echo   '<div class="demo-card-square mdl-card mdl-shadow--2dp produit">
-                <div class="mdl-card__title mdl-card--expand">
+                <div class="mdl-card__title mdl-card--expand" style="background: url(\'./lib/img/'.$value->getIdProduct().'.jpg\') center / cover">
                     <h2 class="mdl-card__title-text">'.htmlspecialchars($value->getProductName()).'</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
@@ -23,4 +26,5 @@ foreach ($tab as $value){
 
 }
 
-
+?>
+</div>

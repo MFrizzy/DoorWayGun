@@ -19,4 +19,11 @@ class ControllerProduct
         require_once File::build_path(array('view','view.php'));
     }
 
+    public static function create() {
+        $view='update';
+        $pagetitle='Créer un nouveau produit';
+        $action='created';
+        require File::build_path(array('view','view.php'));
+    }
+
 }
