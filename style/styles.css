@@ -7,3 +7,22 @@ body {
     width: 512px;
     height: 512px;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.mdl-textfield {
+    margin:auto;
+}
+
+legend {
+    text-align: center;
+}

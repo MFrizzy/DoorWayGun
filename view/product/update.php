@@ -6,53 +6,34 @@
  * Time: 17:17
  */
 
-$action='created';
-$_GET['action']='create';
-
-/*
- * <p>
-            <label for="immat_id">License number</label> :
-            <input <?php if($_GET['action']=='update') echo 'readonly '; ?>type="text" placeholder="Ex : 256AB34" value="<?php echo htmlspecialchars($v->getImmat())?>" name="immatriculation" id="immat_id" required/>
-        </p>
-        <p>
-            <label for="couleur">Product name</label> :
-            <input type="text" placeholder="Ex : Blue" value="<?php echo htmlspecialchars($v->getCouleur())?>" name="couleur" id="couleur" required/>
-        </p>
-        <p>
-            <label for="marque">Marque</label> :
-            <input type="text" placeholder="Ex : Renault " value="<?php echo htmlspecialchars($v->getMarque())?>" name="marque" id="marque" required/>
-        </p>
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
- *
- */
+$action=$_GET['action'].'d';
 
 ?>
 
 <form method="post" action="index.php?controller=product&action=<?php echo $action; ?>">
-        <legend>Creation d'un nouveau produit :</legend>
+    <legend><h3>Creation d'un nouveau produit :</h3></legend>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="productName" name="productName">
+            <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getProductName()) ?>" type="text" id="productName" name="productName" required>
             <label class="mdl-textfield__label" for="productName">Product name</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="prix" name="prix">
+            <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getPrice()) ?>" type="text" id="prix" name="prix" required>
             <label class="mdl-textfield__label" for="prix">Price</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="description" name="description">
-            <label class="mdl-textfield__label" for="description">Product name</label>
+            <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getDescription()) ?>" type="text" id="description" name="description" required>
+            <label class="mdl-textfield__label" for="description">Description</label>
         </div>
 
-        <div>
-            <input type="file" name="image">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input type="file" name="image" required>
         </div>
 
         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">
             <i class="material-icons">add</i>
         </button>
 </form>
+

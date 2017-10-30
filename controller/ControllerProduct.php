@@ -22,7 +22,7 @@ class ControllerProduct
     public static function create() {
         $view='update';
         $pagetitle='Créer un nouveau produit';
-        $action='created';
+        $p= new ModelProduct();
         require File::build_path(array('view','view.php'));
     }
 
