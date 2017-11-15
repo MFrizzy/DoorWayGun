@@ -92,6 +92,23 @@ class ModelProduct extends Model
         return $this->idProduct;
     }
 
+    /**
+     * @return last_id
+     */
+    public static function getLastId() {
+        try {
+            $sql='select count(*) from '.static::$object;
+            $rep=Model::$pdo->prepare($sql);
+            $rep->execute();
+            $donnee=$rep->fetchAll(PDO::FETCH_ASSOC);
+            $retourne=$donnee[0];
+            return (int)$retourne["count(*)"];
+        }
+        catch (Exception $e) {
+            return false;
+        }
+    }
+
 
 
 

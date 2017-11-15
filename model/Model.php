@@ -38,8 +38,7 @@ class Model
             return $rep->fetchAll();
         }
         catch (Exception $e) {
-            //return false;
-            echo $e->getMessage();
+            return false;
         }
     }
 
