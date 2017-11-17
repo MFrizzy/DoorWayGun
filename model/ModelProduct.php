@@ -97,12 +97,12 @@ class ModelProduct extends Model
      */
     public static function getLastId() {
         try {
-            $sql='select count(*) from '.static::$object;
+            $sql='select max(idProduct) from '.static::$object;
             $rep=Model::$pdo->prepare($sql);
             $rep->execute();
             $donnee=$rep->fetchAll(PDO::FETCH_ASSOC);
             $retourne=$donnee[0];
-            return (int)$retourne["count(*)"];
+            return (int)$retourne["max(idProduct)"];
         }
         catch (Exception $e) {
             return false;

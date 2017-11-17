@@ -17,7 +17,7 @@ class ControllerUser
     {
         $tab = ModelUser::selectAll();
         if ($tab == false) {
-            ControllerMain::erreur();
+            //ControllerMain::erreur();
         } else {
             $view = 'list';
             $pagetitle = 'Liste utilisateurs';

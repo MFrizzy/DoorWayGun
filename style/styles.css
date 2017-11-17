@@ -51,7 +51,7 @@ h5 {
     animation-delay: 2s;
     animation-duration: 1s;
     animation-name:disapear;
-    /**animation-fill-mode:forwards; */
+    animation-fill-mode:forwards;
 }
 
 @keyframes disapear {
@@ -69,3 +69,8 @@ h5 {
     float: left;
     text-align: center;
 }
+.detail {
+    margin:auto;
+    margin-top: 15px;
+}
+

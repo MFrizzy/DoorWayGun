@@ -15,21 +15,20 @@ foreach ($tab as $value){
                     <h2 class="mdl-card__title-text">'.htmlspecialchars($value->getProductName()).'</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-                   '.htmlspecialchars($value->getDescription()).'
+                    <span class="mdl-chip">
+                        <span class="mdl-chip__text">
+                            '.htmlspecialchars($value->getPrice()).' €    
+                        </span>
+                    </span>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
+                    <a href="index.php?controller=product&action=read&idProduct='.$value->getIdProduct().'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"><i class="material-icons">details</i></a>
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Acheter
+                        Ajouter au panier
                     </a>
                 </div>
             </div>';
 
-}
-
-if($produit_cree) {
-    echo    '<div class="snackbar">
-                        <div class="snackbar__text">Produit créé</div>
-                    </div>';
 }
 
 ?>
