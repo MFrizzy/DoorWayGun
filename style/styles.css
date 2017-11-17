@@ -31,3 +31,41 @@ h5 {
     text-align: center;
 }
 
+.flex { display: flex;}
+
+.users{
+    margin: 15px auto;
+}
+
+.snackbar{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    cursor: default;
+    background-color: #323232;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    border-radius: 2px;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-name:disapear;
+    /**animation-fill-mode:forwards; */
+}
+
+@keyframes disapear {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.snackbar__text {
+    padding: 14px 22px;
+    color: #fff;
+    float: left;
+    text-align: center;
+}

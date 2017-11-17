@@ -19,7 +19,18 @@ class ControllerProduct
             ControllerMain::erreur();
         } else {
             $view = 'list';
-            $pagetitle = 'Accueil'; // pas sur
+            $pagetitle = 'Accueil';
+            require_once File::build_path(array('view', 'view.php'));
+        }
+    }
+
+    public static function readAllAdmin() {
+        $tab = ModelProduct::selectAll();
+        if ($tab == false) {
+            ControllerMain::erreur();
+        } else {
+            $view = 'list2';
+            $pagetitle = 'Listes des produits';
             require_once File::build_path(array('view', 'view.php'));
         }
     }
@@ -36,16 +47,12 @@ class ControllerProduct
     {
         if (isset($_POST['productName']) && isset($_POST['price']) && isset($_POST['description']) && isset($_FILES['image']) && !empty($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
             if (is_numeric($_POST['price']) && is_string($_POST['productName']) && is_string($_POST['description']) && $_FILES['image']['type'] == 'image/jpeg') {
-                echo 'Tous les types des vb sont bons';
                 $nom=ModelProduct::getLastId()+1;
                 if ($_FILES['image']['size'] > 2048000) {
-                    //ControllerMain::erreur();
-                    echo 'taille';
+                    ControllerMain::erreur();
                 }
                 else if (!move_uploaded_file($_FILES['image']['tmp_name'], 'lib/img/'.$nom.'.jpg')) {
-                    //ControllerMain::erreur();
-                    echo 'prob enregistrement';
-                    var_dump($_FILES['image']);
+                    ControllerMain::erreur();
                 } else {
                     $data = array(
                         "productName" => $_POST["productName"],
@@ -53,15 +60,22 @@ class ControllerProduct
                         "description" => $_POST['description']
                     );
                     ModelProduct::save($data);
+                    $tab = ModelProduct::selectAll();
+                    if ($tab == false) {
+                        ControllerMain::erreur();
+                    } else {
+                        $view = 'list';
+                        $pagetitle = 'Accueil';
+                        $produit_cree=true;
+                        require_once File::build_path(array('view', 'view.php'));
+                    }
                 }
             } else {
-                //ControllerMain::erreur();
-                echo 'type';
+                ControllerMain::erreur();
             }
         }
          else {
-            //ControllerMain::erreur();
-            echo 'transfert';
+            ControllerMain::erreur();
         }
     }
 

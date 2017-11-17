@@ -10,6 +10,10 @@ require_once File::build_path(array('model','Model.php'));
 
 class ModelUser extends Model
 {
+
+    protected static $object = 'User';
+    protected static $primary = 'idUser';
+
     private $idUser;
     private $mailUser;
     private $passwordUser;

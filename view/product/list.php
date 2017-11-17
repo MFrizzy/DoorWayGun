@@ -26,5 +26,11 @@ foreach ($tab as $value){
 
 }
 
+if($produit_cree) {
+    echo    '<div class="snackbar">
+                        <div class="snackbar__text">Produit créé</div>
+                    </div>';
+}
+
 ?>
 </div>
