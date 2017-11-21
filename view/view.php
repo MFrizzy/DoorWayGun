@@ -20,7 +20,8 @@
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="./index.php">Products</a>
                 <a class="mdl-navigation__link" href="">Mon Compte</a>
-                <a class="mdl-navigation__link" href="">WLH</a>
+                <a class="mdl-navigation__link" href="">Mes Commandes</a>
+                <a class="mdl-navigation__link" href=""><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="0">shopping_basket</div></a> <!-- A modifier -->
             </nav>
         </div>
     </header>

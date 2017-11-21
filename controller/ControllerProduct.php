@@ -142,9 +142,15 @@ class ControllerProduct
                     "description" => $_POST['description']
                 );
                 if(ModelProduct::update($data)) {
-                    $view = 'list2';
-                    $pagetitle = 'Accueil';
-                    require_once File::build_path(array('view', 'view.php'));
+                    $tab = ModelProduct::selectAll();
+                    if ($tab == false) {
+                        echo '3';
+                        ControllerMain::erreur();
+                    } else {
+                        $view = 'list2';
+                        $pagetitle = 'Accueil';
+                        require_once File::build_path(array('view', 'view.php'));
+                    }
                 }
                 else {
                     ControllerMain::erreur();
