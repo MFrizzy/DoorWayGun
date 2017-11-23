@@ -25,6 +25,12 @@ class ControllerUser
         }
     }
 
-
+    public static function create()
+    {
+        $view='update';
+        $pagetitle = 'Inscription';
+        $p = new ModelUser();
+        require File::build_path(array('view', 'view.php'));
+    }
 
 }

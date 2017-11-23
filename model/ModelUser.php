@@ -14,10 +14,95 @@ class ModelUser extends Model
     protected static $object = 'User';
     protected static $primary = 'idUser';
 
+    private $nomUser;
+    private $prenomUser;
+    private $adresseUser;
+    private $nomVille;
+    private $codePostal;
     private $idUser;
     private $mailUser;
     private $passwordUser;
     private $activated;
+
+    /**
+     * @return mixed
+     */
+    public function getNomUser()
+    {
+        return $this->nomUser;
+    }
+
+    /**
+     * @param mixed $nomUser
+     */
+    public function setNomUser($nomUser)
+    {
+        $this->nomUser = $nomUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrenomUser()
+    {
+        return $this->prenomUser;
+    }
+
+    /**
+     * @param mixed $prenomUser
+     */
+    public function setPrenomUser($prenomUser)
+    {
+        $this->prenomUser = $prenomUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdresseUser()
+    {
+        return $this->adresseUser;
+    }
+
+    /**
+     * @param mixed $adresseUser
+     */
+    public function setAdresseUser($adresseUser)
+    {
+        $this->adresseUser = $adresseUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNomVille()
+    {
+        return $this->nomVille;
+    }
+
+    /**
+     * @param mixed $nomVille
+     */
+    public function setNomVille($nomVille)
+    {
+        $this->nomVille = $nomVille;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * @param mixed $codePostal
+     */
+    public function setCodePostal($codePostal)
+    {
+        $this->codePostal = $codePostal;
+    }
 
     /**
      * @return mixed
