@@ -50,11 +50,9 @@ class ControllerProduct
             if (is_numeric($_POST['price']) && is_string($_POST['productName']) && is_string($_POST['description']) && $_FILES['image']['type'] == 'image/jpeg') {
                 $nom=ModelProduct::getLastId()+1;
                 if ($_FILES['image']['size'] > 2048000) {
-                    echo 4;
                     ControllerMain::erreur();
                 }
                 else if (!move_uploaded_file($_FILES['image']['tmp_name'], 'lib/img/'.$nom.'.jpg')) {
-                    echo '3';
                     ControllerMain::erreur();
                 } else {
                     $data = array(
@@ -62,24 +60,25 @@ class ControllerProduct
                         "price" => $_POST["price"],
                         "description" => $_POST['description']
                     );
-                    ModelProduct::save($data);
-                    $tab = ModelProduct::selectAll();
-                    if ($tab == false) {
-                        echo '3';
+                    if(!ModelProduct::save($data)) {
                         ControllerMain::erreur();
-                    } else {
-                        $view = 'list2';
-                        $pagetitle = 'Accueil';
-                        require_once File::build_path(array('view', 'view.php'));
+                    }
+                    else {
+                        $tab = ModelProduct::selectAll();
+                        if ($tab == false) {
+                            ControllerMain::erreur();
+                        } else {
+                            $view = 'list2';
+                            $pagetitle = 'Accueil';
+                            require_once File::build_path(array('view', 'view.php'));
+                        }
                     }
                 }
             } else {
-                echo 'erreur 1';
                 ControllerMain::erreur();
             }
         }
          else {
-            echo '2';
             ControllerMain::erreur();
         }
     }

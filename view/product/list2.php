@@ -23,6 +23,7 @@
 
         foreach ($tab as $value) {
             echo    '<tr>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=read&idProduct='.$value->getIdProduct().'"><i class="material-icons">expand_more</i></a></th>
                         <th>'.$value->getIdProduct().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$value->getProductName().'</th>
                         <th>'.$value->getPrice().'</th>

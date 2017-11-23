@@ -103,7 +103,7 @@ class Model
         }
         catch (Exception $e) {
             if($e->getCode()==23000) return false;
-            //else ControllerMain::erreur();
+            else ControllerMain::erreur();
         }
         return true;
     }
