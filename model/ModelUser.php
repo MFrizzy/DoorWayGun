@@ -177,4 +177,8 @@ class ModelUser extends Model
         }
     }
 
+    public static function checkPassword($login, $mot_de_passe_chiffre) {
+
+    }
+
 }

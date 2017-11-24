@@ -41,6 +41,11 @@ $action=$_GET['action'].'d';
     </div>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getPasswordUser()) ?>" type="password" id="passwordUser2" name="passwordUser2" required>
+        <label class="mdl-textfield__label" for="passwordUser2">Répéter vore mot de passe</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getAdresseUser()) ?>" type="text" id="adresseUser" name="adresseUser" required>
         <label class="mdl-textfield__label" for="adresseUser">Adresse</label>
     </div>

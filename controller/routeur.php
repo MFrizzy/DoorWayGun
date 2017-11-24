@@ -14,13 +14,14 @@ if(!isset($_GET['controller']) && !isset($_GET['action'])) ControllerProduct::re
 else if(isset($_GET['controller']) && $_GET['action']) {
     $controller_class='Controller'.ucfirst($_GET['controller']);
     if (class_exists($controller_class) && in_array($_GET['action'],get_class_methods($controller_class))) {
-        $controller_class::$_GET['action']();
+        $action=$_GET['action'];
+        $controller_class::$action();
     }
     else {
-        ControllerMain::erreur();
+        ControllerMain::erreur(24);
     }
 
 }
 else {
-    ControllerMain::erreur();
+    ControllerMain::erreur(25);
 }

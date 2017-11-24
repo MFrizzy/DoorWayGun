@@ -16,7 +16,7 @@ class ControllerProduct
     {
         $tab = ModelProduct::selectAll();
         if ($tab == false) {
-            ControllerMain::erreur();
+            ControllerMain::erreur(1);
         } else {
             $view = 'list';
             $pagetitle = 'Accueil';
@@ -28,7 +28,7 @@ class ControllerProduct
     public static function readAllAdmin() {
         $tab = ModelProduct::selectAll();
         if ($tab == false) {
-            ControllerMain::erreur();
+            ControllerMain::erreur(2);
         } else {
             $view = 'list2';
             $pagetitle = 'Listes des produits';
@@ -50,10 +50,10 @@ class ControllerProduct
             if (is_numeric($_POST['price']) && is_string($_POST['productName']) && is_string($_POST['description']) && $_FILES['image']['type'] == 'image/jpeg') {
                 $nom=ModelProduct::getLastId()+1;
                 if ($_FILES['image']['size'] > 2048000) {
-                    ControllerMain::erreur();
+                    ControllerMain::erreur(3);
                 }
                 else if (!move_uploaded_file($_FILES['image']['tmp_name'], 'lib/img/'.$nom.'.jpg')) {
-                    ControllerMain::erreur();
+                    ControllerMain::erreur(4);
                 } else {
                     $data = array(
                         "productName" => $_POST["productName"],
@@ -61,12 +61,12 @@ class ControllerProduct
                         "description" => $_POST['description']
                     );
                     if(!ModelProduct::save($data)) {
-                        ControllerMain::erreur();
+                        ControllerMain::erreur(5);
                     }
                     else {
                         $tab = ModelProduct::selectAll();
                         if ($tab == false) {
-                            ControllerMain::erreur();
+                            ControllerMain::erreur(6);
                         } else {
                             $view = 'list2';
                             $pagetitle = 'Accueil';
@@ -75,11 +75,11 @@ class ControllerProduct
                     }
                 }
             } else {
-                ControllerMain::erreur();
+                ControllerMain::erreur(7);
             }
         }
          else {
-            ControllerMain::erreur();
+            ControllerMain::erreur(8);
         }
     }
 
@@ -90,7 +90,7 @@ class ControllerProduct
             $del=unlink('lib/img/'.$_GET['idProduct'].'.jpg');
             $tab = ModelProduct::selectAll();
             if ($tab == false || $del==false) {
-                ControllerMain::erreur();
+                ControllerMain::erreur(9);
             } else {
                 $view = 'list2';
                 $pagetitle = 'Accueil';
@@ -98,7 +98,7 @@ class ControllerProduct
             }
         }
         else {
-            ControllerMain::erreur();
+            ControllerMain::erreur(10);
         }
     }
 
@@ -107,13 +107,13 @@ class ControllerProduct
         if (isset($_GET["idProduct"])) {
             $produit = ModelProduct::select($_GET['idProduct']);
             if ($produit == false) {
-                ControllerMain::erreur();
+                ControllerMain::erreur(11);
             } else {
                 $view = 'detail';
                 $pagetitle = $produit->getProductName();
                 require_once File::build_path(array('view', 'view.php'));
             }
-        } else {ControllerMain::erreur();}
+        } else {ControllerMain::erreur(12);}
 
     }
 
@@ -122,13 +122,13 @@ class ControllerProduct
         if (isset($_GET['idProduct'])) {
             $p = ModelProduct::select($_GET['idProduct']);
             if ($p == false) {
-                ControllerMain::erreur();
+                ControllerMain::erreur(13);
             } else {
                 $view = 'update';
                 $pagetitle = 'Modifier ' . $p->getProductName();
                 require_once File::build_path(array('view', 'view.php'));
             }
-        } else { ControllerMain::erreur();}
+        } else { ControllerMain::erreur(14);}
     }
 
     public static function updated() {
@@ -144,7 +144,7 @@ class ControllerProduct
                     $tab = ModelProduct::selectAll();
                     if ($tab == false) {
                         echo '3';
-                        ControllerMain::erreur();
+                        ControllerMain::erreur(15);
                     } else {
                         $view = 'list2';
                         $pagetitle = 'Accueil';
@@ -152,16 +152,16 @@ class ControllerProduct
                     }
                 }
                 else {
-                    ControllerMain::erreur();
+                    ControllerMain::erreur(16);
                 }
 
             }
             else {
-                ControllerMain::erreur();
+                ControllerMain::erreur(17);
             }
         }
         else{
-            ControllerMain::erreur();
+            ControllerMain::erreur(18);
         }
     }
 

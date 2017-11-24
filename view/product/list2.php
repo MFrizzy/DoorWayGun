@@ -12,10 +12,10 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp users">
         <thead>
             <tr>
+                <th>Plus</th>
                 <th>IdProduct</th>
                 <th class="mdl-data-table__cell--non-numeric">Product name</th>
                 <th>Price</th>
-                <th class="mdl-data-table__cell--non-numeric">Description</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,6 @@
                         <th>'.$value->getIdProduct().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$value->getProductName().'</th>
                         <th>'.$value->getPrice().'</th>
-                        <th class="mdl-data-table__cell--non-numeric">'.$value->getDescription().'</th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=update&idProduct='.$value->getIdProduct().'"><i class="material-icons">mode_edit</i></a></th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=updataImg&idProduct='.$value->getIdProduct().'"><i class="material-icons">add_a_photo</i></a></th> 
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=delete&idProduct='.$value->getIdProduct().'"><i class="material-icons">delete</i></a></th>

@@ -22,7 +22,7 @@ class Model
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             if (Conf::getDebug()) echo $e->getMessage();
-            else ControllerMain::erreur();
+            else ControllerMain::erreur(26);
             die();
         }
     }
@@ -103,7 +103,7 @@ class Model
         }
         catch (Exception $e) {
             if($e->getCode()==23000) return false;
-            else ControllerMain::erreur();
+            else ControllerMain::erreur(27);
         }
         return true;
     }
