@@ -74,3 +74,10 @@ h5 {
     margin-top: 15px;
 }
 
+.mdl-layout {
+    height:auto;
+}
+
+button {
+    margin-bottom: 15px;
+}
