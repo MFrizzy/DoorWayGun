@@ -47,8 +47,15 @@ $action=$_GET['action'].'d';
         ?>
 
 
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">
-            <i class="material-icons">add</i>
-        </button>
+    <?php
+    if ($_GET['action'] == 'create') {
+        $bouton = "add";
+    } else {
+        $bouton = "keyboard_arrow_right";
+    }
+    ?>
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">
+        <i class="material-icons"><?php echo $bouton; ?></i>
+    </button>
 </form>
 
