@@ -68,7 +68,11 @@ class Model
                 "primary" => $primary_value
             );
             $req_prep->execute($values);
-        } catch (Exception $e) {return false;}
+            return true;
+        } catch (Exception $e) {
+            //return false;
+            echo $e->getMessage();
+        }
     }
 
     public static function update($data)  {

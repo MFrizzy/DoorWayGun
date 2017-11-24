@@ -18,12 +18,59 @@ class ControllerUser
     {
         $tab = ModelUser::selectAll();
         if ($tab == false) {
-            //ControllerMain::erreur();
+            ControllerMain::erreur(38);
         } else {
             $view = 'list';
             $pagetitle = 'Liste utilisateurs';
             require_once File::build_path(array('view', 'view.php'));
         }
+    }
+    
+    public static function read() {
+        if(isset($_GET['idUser'])) {
+            $id = $_GET['idUser'];
+            $user = ModelUser::select($id);
+            if($user == false) {
+                ControllerMain::erreur(33);
+            } else {
+                $view = 'detail';
+                $pagetitle = 'Utilisateur '.$id;
+                require_once File::build_path(array('view', 'view.php'));
+            }
+        } else {ControllerMain::erreur(34);}
+    }
+    
+    public static function delete() {
+        if(isset($_GET['idUser'])) {
+            $id = $_GET['idUser'];
+            $user = ModelUser::select($id);
+        } if($user == false) {
+            ControllerMain::erreur(37);
+        } else {
+            $view = 'confirm';
+            $pagetitle = 'Confirmation suppression';
+            require_once File::build_path(array('view', 'view.php'));
+        }
+        
+    }
+    
+    public static function deleted() {
+        if(isset($_GET['idUser'])) {
+            $id = $_GET['idUser'];
+            $user = ModelUser::delete($id);
+            if($user == false) {
+                ControllerMain::erreur(35);
+            } else {
+                $tab = ModelUser::selectAll();
+                if ($tab == false) {
+                    ControllerMain::erreur(39);
+                } else {
+                    $view = 'list';
+                    $pagetitle = 'Liste utilisateurs';
+                    require_once File::build_path(array('view', 'view.php'));
+                }
+            }
+        } else {ControllerMain::erreur(36);}
     }
 
     public static function create()
@@ -61,12 +108,14 @@ class ControllerUser
                         } else {
                             $view = 'list';
                             $pagetitle = 'Liste des utilisateurs';
+                            $mauvais_mdp=false;
                             require_once File::build_path(array('view', 'view.php'));
                         }
                     }
                 }
                 else {
                     ControllerMain::erreur(21);
+                    // TODO redirect vers page connexion avec variable $mauvais_mdp=true;
                 }
             } else {
                 ControllerMain::erreur(22);

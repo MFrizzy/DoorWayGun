@@ -27,6 +27,7 @@
                         <th>'.$value->getIdUser().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$value->getMailUser().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$activated.'</th>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=update&idUser='.$value->getIdUser().'"><i class="material-icons">mode_edit</i></a></th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=delete&idUser='.$value->getIdUser().'"><i class="material-icons">delete</i></a></th>
                     </tr>
             ';
