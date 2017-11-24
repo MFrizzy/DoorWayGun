@@ -79,8 +79,8 @@ class ControllerUser {
     }
 
     public static function created() {
-        if (isset($_POST['nomUser']) && isset($_POST['prenomUser']) && isset($_POST['mailUser']) && isset($_POST['passwordUser']) && isset($_POST['adresseUser']) && isset($_POST['nomVille']) && isset($_POST['codePostal']) && isset($_POST['passwordUser2'])) {
-            if (is_string($_POST['nomUser']) && is_string($_POST['prenomUser']) && is_string($_POST['mailUser']) && is_string($_POST['passwordUser']) && is_string($_POST['adresseUser']) && is_string($_POST['nomVille']) && is_numeric($_POST['codePostal']) && is_string($_POST['passwordUser2'])) {
+        if (isset($_POST['nomUser']) && isset($_POST['prenomUser']) && isset($_POST['mailUser']) && isset($_POST['passwordUser']) && isset($_POST['adresseUser']) && isset($_POST['nomVille']) && isset($_POST['codePostal']) && isset($_POST['passwordUser2']) && isset($_POST['idUser'])) {
+            if (is_string($_POST['nomUser']) && is_string($_POST['prenomUser']) && is_string($_POST['mailUser']) && is_string($_POST['passwordUser']) && is_string($_POST['adresseUser']) && is_string($_POST['nomVille']) && is_numeric($_POST['codePostal']) && is_string($_POST['passwordUser2']) && is_string($_POST['idUser'])) {
                 if ($_POST['passwordUser'] == $_POST['passwordUser2']) {
                     $data = array(
                         'nomUser' => $_POST['nomUser'],
@@ -137,12 +137,15 @@ class ControllerUser {
                     "nomVille" => $_POST['nomVille'],
                     "codePostal" => $_POST['codePostal'],
                     "mailUser" => $_POST['mailUser'],
+                    "idUser" => $_POST['idUser']
                 );
+                var_dump($data);
                 if (!ModelUser::update($data)) {
                     ControllerMain::erreur(32);
                 } else {
-                    $view = 'read';
+                    $view = 'detail';
                     $pagetitle = 'Profil';
+                    $user = ModelUser::select($_POST['idUser']);
                     require_once File::build_path(array('view', 'view.php'));
                 }
             } else {

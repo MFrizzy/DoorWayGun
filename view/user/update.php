@@ -10,13 +10,13 @@ $action = $_GET['action'] . 'd';
 
 <form method="post" action="index.php?controller=user&action=<?php echo $action; ?>">
     <legend><h3>
-<?php
-if ($_GET['action'] == 'create')
-    echo 'Inscription :';
-else {
-    echo 'Modification du profil';
-}
-?>
+            <?php
+            if ($_GET['action'] == 'create')
+                echo 'Inscription :';
+            else {
+                echo 'Modification du profil';
+            }
+            ?>
         </h3></legend>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -60,6 +60,10 @@ else {
         <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getCodePostal()) ?>" type="number" id="codePostal" name="codePostal" required>
         <label class="mdl-textfield__label" for="codePostal">Code Postal</label>
     </div>
+    //Problème de sécurité ?
+    <input name="idUser" type="hidden" value="<?php echo $p->getIdUser() ?>">';
+    //Problème de sécurité ?
+
 
     <?php
     /*
