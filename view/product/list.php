@@ -1,5 +1,5 @@
 
-<div style="display: flex">
+<div class="list-prod">
 
 <?php
 /**

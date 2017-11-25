@@ -75,7 +75,11 @@ h5 {
 }
 
 .mdl-layout {
-    height:auto;
+    height:100%;
+}
+
+.mdl-layout__content {
+    min-height: fit-content;
 }
 
 button {
@@ -97,4 +101,10 @@ h1 {
     margin:auto;
     display: flex;
     align-items:center;
+}
+
+.list-prod {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
