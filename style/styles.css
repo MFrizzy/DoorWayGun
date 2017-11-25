@@ -90,6 +90,11 @@ h1 {
     margin: auto;
     margin-top: 15px;
     margin-bottom: 15px;
-    display:block;
-    width:200px;
+    text-align: center;
+}
+
+.achat {
+    margin:auto;
+    display: flex;
+    align-items:center;
 }

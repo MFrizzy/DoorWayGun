@@ -47,17 +47,14 @@ class ModelBasket
         }
     }
 
-    public function remove($idProduct,$quantity) {
+    public function remove($idProduct) {
         $i=0; $trouve=false; $max=count($this->products);
-        while($i<$max && $trouve=false) {
-            if($this->products[i][0]==$idProduct) {
-                $trouve=false;
-                $this->products[i][1]-=$quantity;
+        while($i<$max && $trouve==false) {
+            if($this->products[$i][0]==$idProduct) {
+                $trouve=true;
+                unset($this->products[$i]);
             }
             $i++;
-        }
-        if(!$trouve) {
-            $this->products[]=array($idProduct,$quantity);
         }
     }
 

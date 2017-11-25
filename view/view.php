@@ -21,7 +21,7 @@
                 <a class="mdl-navigation__link" href="./index.php">Products</a>
                 <a class="mdl-navigation__link" href="">Mon Compte</a>
                 <a class="mdl-navigation__link" href="">Mes Commandes</a>
-                <a class="mdl-navigation__link" href=""><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="0">shopping_basket</div></a> <!-- A modifier -->
+                <a class="mdl-navigation__link" href="index.php?controller=basket&action=read"><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="<?php if(isset($_COOKIE['basketSize'])) echo $_COOKIE['basketSize']; else echo 0;?>">shopping_basket</div></a> <!-- A modifier -->
             </nav>
         </div>
     </header>

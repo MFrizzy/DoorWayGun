@@ -28,10 +28,8 @@ if(isset($tab)) {
                         <td class="mdl-data-table__cell--non-numeric">'.$prod->getProductName().'</td>
                         <td class="mdl-data-table__cell">'.$value[1].'</td>
                         <td class="mdl-data-table__cell">'.$prod->getPrice().'</td>
-                        <td class="mdl-data-table__cell">'.(int)$prod->getPrice()*(int)$value[1].'</td>
-                        <td class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=update&idProduct='.$prod->getIdProduct().'"><i class="material-icons">mode_edit</i></a></td>
-                        <td class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=updataImg&idProduct='.$prod->getIdProduct().'"><i class="material-icons">add_a_photo</i></a></td> 
-                        <td class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=delete&idProduct='.$prod->getIdProduct().'"><i class="material-icons">delete</i></a></td>
+                        <td class="mdl-data-table__cell">'.(int)$prod->getPrice()*(int)$value[1].'</td> 
+                        <td class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=basket&action=remove&idProduct='.$prod->getIdProduct().'"><i class="material-icons">delete</i></a></td>
                     </tr>
             ';
         $total+=(int)$prod->getPrice()*(int)$value[1];
@@ -54,9 +52,11 @@ if(count($tab)==0) echo '<h1>PANIER VIDE</h1>';
 <?php
 
 if(count($tab)!=0) {
-    echo '<a href="index.php?controller=product&action=readAll" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+    echo '<div class="achat"><a href="index.php?controller=product&action=readAll" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
   Passer la commande
-</button></a>';
+</button></a> <a href="index.php" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+  Continuer mes achats
+</button></a></div>';
 }
 
 ?>

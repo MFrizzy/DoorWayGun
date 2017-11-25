@@ -36,7 +36,15 @@ class ControllerBasket
     }
 
     public static function remove() {
-
+        if(isset($_GET['idProduct'])) {
+            $basket=ModelBasket::getBasket();
+            $basket->remove($_GET['idProduct']);
+            $basket->save();
+            header('location: index.php?controller=basket&action=read');
+        }
+        else {
+            ControllerMain::erreur(44);
+        }
     }
 
 }
