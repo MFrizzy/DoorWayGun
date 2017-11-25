@@ -81,3 +81,15 @@ h5 {
 button {
     margin-bottom: 15px;
 }
+
+h1 {
+    text-align: center;
+}
+
+.bouton {
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display:block;
+    width:200px;
+}

@@ -23,7 +23,7 @@ foreach ($tab as $value){
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a href="index.php?controller=product&action=read&idProduct='.$value->getIdProduct().'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"><i class="material-icons">details</i></a>
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <a href="index.php?controller=basket&action=add&idProduct='.$value->getIdProduct().'&quantity=1" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Ajouter au panier
                     </a>
                 </div>

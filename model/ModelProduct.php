@@ -109,6 +109,20 @@ class ModelProduct extends Model
         }
     }
 
+    public static function exist($primary) {
+        try {
+            $sql='select count(*) from Product where idProduct='.$primary;
+            $rep=Model::$pdo->prepare($sql);
+            $rep->execute();
+            $donnee=$rep->fetchAll(PDO::FETCH_ASSOC);
+            $retourne=$donnee[0];
+            return (int)$retourne["count(*)"];
+        }
+        catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 
 
 
