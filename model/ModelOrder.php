@@ -28,7 +28,11 @@ class ModelOrder
     {
         $this->products = $products;
     } // C le tableau du parametres products du panier lol ez pz
-
+    
+    public function getState($idOrder){
+        
+    }
+    
     public function __construct($idOrder, $idUser, $date, $heure, $adresseLivraison, $products)
     {
         $this->$idOrder = $idOrder;
@@ -77,11 +81,6 @@ class ModelOrder
         {
             return false;
         }
-    }
-
-    public static function delete($idOrder)
-    {
-
     }
 
     public function save()

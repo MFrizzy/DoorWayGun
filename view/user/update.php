@@ -60,9 +60,7 @@ $action = $_GET['action'] . 'd';
         <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getCodePostal()) ?>" type="number" id="codePostal" name="codePostal" required>
         <label class="mdl-textfield__label" for="codePostal">Code Postal</label>
     </div>
-    //Problème de sécurité ?
     <input name="idUser" type="hidden" value="<?php echo $p->getIdUser() ?>">';
-    //Problème de sécurité ?
 
 
     <?php
