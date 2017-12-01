@@ -32,9 +32,11 @@ class ModelOrder
         $this->products = $products;
     } // C le tableau du parametres products du panier lol ez pz
     
+    
+    
     public function getState($idOrder){
         return $states[$this->etat];
-        //Verif
+        //A Verif
     }
     
     public function __construct($idOrder, $idUser, $date, $heure, $adresseLivraison, $products)
