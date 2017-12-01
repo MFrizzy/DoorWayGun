@@ -33,14 +33,13 @@ class ModelBasket
     }
 
     public function add($idProduct,$quantity) {
-        $i=0; $trouve=false; $max=count($this->products);
-        while($i<$max && $trouve==false) {
-            if($this->products[$i][0]==$idProduct) {
+        $trouve=false;
+        foreach ($this->products as $cle => $value){
+            if($value[0]==$idProduct) {
                 $trouve=true;
-                $q=(int)$this->products[$i][1];
-                $this->products[$i][1]=$q+(int)$quantity;
+                $q=(int)$value[1];
+                $this->products[$cle][1]=$q+(int)$quantity;
             }
-            $i++;
         }
         if(!$trouve) {
             $this->products[]=array($idProduct,$quantity);
@@ -49,12 +48,10 @@ class ModelBasket
 
     public function remove($idProduct) {
         $i=0; $trouve=false; $max=count($this->products);
-        while($i<$max && $trouve==false) {
-            if($this->products[$i][0]==$idProduct) {
-                $trouve=true;
-                unset($this->products[$i]);
+        foreach ($this->products as $cle => $value) {
+            if($value[0]==$idProduct) {
+                unset($this->products[$cle]);
             }
-            $i++;
         }
     }
 
