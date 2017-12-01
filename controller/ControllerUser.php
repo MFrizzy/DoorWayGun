@@ -218,10 +218,7 @@ class ControllerUser
                     $user=ModelUser::selectByMail($_POST['login']);
                     $_SESSION['login'] = $user->getIdUser();
                     $_SESSION['is_admin'] = $user->getAdmin();
-                    /*
-                     * TODO Enregistrer que si le switch est al et true
-                     */
-                    setcookie('login',$_POST['login'],time()+7257600); // 12 semaines
+                    if (isset($_POST['save'])) setcookie('login',$_POST['login'],time()+7257600); // 12 semaines
                     $view = 'detail';
                     $pagetitle = 'Mon profil';
                     require_once File::build_path(array('view', 'view.php'));
