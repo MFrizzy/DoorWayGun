@@ -23,6 +23,7 @@
             if($user->getActivated()) {$activated='<i class="material-icons">verified_user</i>';}
             else {$activated='';}
             echo    '<tr>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=readAll"><i class="material-icons">keyboard_arrow_left</i></a></th>
                         <th>'.$user->getIdUser().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$user->getMailUser().'</th>
                         <th class="mdl-data-table__cell--non-numeric">'.$activated.'</th>
