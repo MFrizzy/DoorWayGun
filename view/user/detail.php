@@ -19,7 +19,6 @@
         </thead>
         <tbody>
         <?php
-        
             if($user->getActivated()) {$activated='<i class="material-icons">verified_user</i>';}
             else {$activated='';}
             echo    '<tr>

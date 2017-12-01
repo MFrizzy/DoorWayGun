@@ -24,14 +24,21 @@
         <span class="mdl-layout-title">Menu</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="./index.php">Products</a>
-            <?php   if(isset($_SESSION['login'])) echo '<a class="mdl-navigation__link" href="./index.php?controller=user&action=read">Mon Compte</a>
-                                                       <a class="mdl-navigation__link" href="./index.php?controller=order&action=readAllByUser">Mes Commandes</a>
-                                                       <a class="mdl-navigation__link" href="./index.php?controller=user&action=deconnect">Se deconnecter</a>
+            <?php   if(isset($_SESSION['login'])) {
+                echo '<a class="mdl-navigation__link" href="./index.php?controller=user&action=read">Mon Compte</a>
+                     <a class="mdl-navigation__link" href="./index.php?controller=order&action=readAllByUser">Mes Commandes</a>
+                     <a class="mdl-navigation__link" href="./index.php?controller=user&action=deconnect">Se deconnecter</a>
                                                        ';
+            if($_SESSION['is_admin']) {
+            echo '<a class="mdl-navigation__link" href="./index.php?controller=order&action=readAll">Gestion des commandes</a>
+                  <a class="mdl-navigation__link" href="./index.php?controller=user&action=readAll">Gestion des utilisateurs</a>
+                  <a class="mdl-navigation__link" href="./index.php?controller=product&action=readAllAdmin">Gestion des produits</a>';
+            }
+            }
                     else echo '
                                 <a class="mdl-navigation__link" href="./index.php?controller=user&action=connect">Se connecter</a>
                                 <a class="mdl-navigation__link" href="./index.php?controller=user&action=create">S\'inscrire</a>
-                                '
+                                ';
             ?>
         </nav>
     </div>

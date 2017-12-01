@@ -201,6 +201,7 @@ class ControllerUser
                 if (ModelUser::checkPassword($_POST['login'], Security::chiffrer($_POST['mdp']))) {
                     $user=ModelUser::selectByMail($_POST['login']);
                     $_SESSION['login'] = $user->getIdUser();
+                    $_SESSION['is_admin'] = $user->getAdmin();
                     $view = 'detail';
                     $pagetitle = 'Mon profil';
                     require_once File::build_path(array('view', 'view.php'));

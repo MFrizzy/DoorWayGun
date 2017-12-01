@@ -28,6 +28,14 @@ class ModelUser extends Model
     /**
      * @return mixed
      */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getNomUser()
     {
         return $this->nomUser;
