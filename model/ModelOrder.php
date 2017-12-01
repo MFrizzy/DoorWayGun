@@ -86,7 +86,25 @@ class ModelOrder
 
     public function save()
     {
+        //TODO WES
+        try {
+            if(ModelUser::getActivated() == false) {
+                //do not save if idUser.activated = false
+            }
+            $sql = 'INSERT INTO Orders (idOrder, idUser, date, heure, adresseLivraison, products) VALUES (:idOrder, :idUser, :date, :heure, :adresseLivraison, :products)';
+            $rep_query = Model::$pdo->prepare($sql);
+            $values = array(
+                "idOrder" => $idOrder,
+                "idUser" => $idUser,
+                "date" => $date,
+                "heure" => $heure,
+                "adresseLivraison" => $adresseLivraison,
+                "products" => $products
+            );
+            $rep_query->execute($values);
+        } catch (Exception $ex) {
 
+        }
     }
 
 }
