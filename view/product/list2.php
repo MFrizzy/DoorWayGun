@@ -12,7 +12,7 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp users">
         <thead>
             <tr>
-                <th>Plus</th>
+                <th class="mdl-data-table__cell--non-numeric">Plus</th>
                 <th>IdProduct</th>
                 <th class="mdl-data-table__cell--non-numeric">Product name</th>
                 <th>Price</th>

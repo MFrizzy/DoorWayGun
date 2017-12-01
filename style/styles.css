@@ -74,3 +74,37 @@ h5 {
     margin-top: 15px;
 }
 
+.mdl-layout {
+    height:100%;
+}
+
+.mdl-layout__content {
+    min-height: fit-content;
+}
+
+button {
+    margin-bottom: 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.bouton {
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.achat {
+    margin:auto;
+    display: flex;
+    align-items:center;
+}
+
+.list-prod {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
