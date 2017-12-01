@@ -24,8 +24,15 @@
         <span class="mdl-layout-title">Menu</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="./index.php">Products</a>
-            <a class="mdl-navigation__link" href="">Mon Compte</a>
-            <a class="mdl-navigation__link" href="">Mes Commandes</a>
+            <?php   if(isset($_SESSION['login'])) echo '<a class="mdl-navigation__link" href="./index.php?controller=user&action=read">Mon Compte</a>
+                                                       <a class="mdl-navigation__link" href="./index.php?controller=order&action=readAllByUser">Mes Commandes</a>
+                                                       <a class="mdl-navigation__link" href="./index.php?controller=user&action=deconnect">Se deconnecter</a>
+                                                       ';
+                    else echo '
+                                <a class="mdl-navigation__link" href="./index.php?controller=user&action=connect">Se connecter</a>
+                                <a class="mdl-navigation__link" href="./index.php?controller=user&action=create">S\'inscrire</a>
+                                '
+            ?>
         </nav>
     </div>
     <main class="mdl-layout__content">

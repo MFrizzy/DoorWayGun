@@ -23,6 +23,7 @@ class ModelUser extends Model
     private $mailUser;
     private $passwordUser;
     private $activated;
+    private $admin;
 
     /**
      * @return mixed
@@ -178,7 +179,30 @@ class ModelUser extends Model
     }
 
     public static function checkPassword($login, $mot_de_passe_chiffre) {
+        $user=ModelUser::selectByMail($login);
+        if(!$user) return false;
+        if($user->getPasswordUser()==$mot_de_passe_chiffre)
+        {
+            return true;
+        }
+        else return false;
+    }
 
+    public static function selectByMail($mail) {
+
+        try {
+            $sql='SELECT * FROM '.static::$object.' WHERE mailUser=:mail';
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "mail" => $mail
+            );
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$object));
+            $tab = $req_prep->fetchAll();
+            if (empty($tab)) return false;
+            return $tab[0];
+        }
+        catch (Exception $e) {return false;}
     }
 
 }

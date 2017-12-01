@@ -14,13 +14,13 @@
 
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'] ?>" type="email" id="mailUser" name="mailUser" required>
-        <label class="mdl-textfield__label" for="mailUser">E-mail</label>
+        <input class="mdl-textfield__input" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'] ?>" type="email" id="login" name="login" required>
+        <label class="mdl-textfield__label" for="login">E-mail</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" value="" type="password" id="passwordUser" name="passwordUser" required>
-        <label class="mdl-textfield__label" for="passwordUser">Mot de passe</label>
+        <input class="mdl-textfield__input" value="" type="password" id="mdp" name="mdp" required>
+        <label class="mdl-textfield__label" for="mdp">Mot de passe</label>
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">
