@@ -20,6 +20,9 @@ class ModelOrder
     private $heure;
     private $adresseLivraison;
     private $products;
+    private $etat;
+    
+    private static $states = array("En attente","Validée","Expédiée","Livrée","Annulée");
 
     /**
      * @param mixed $products
@@ -30,7 +33,8 @@ class ModelOrder
     } // C le tableau du parametres products du panier lol ez pz
     
     public function getState($idOrder){
-        
+        return $states[$this->etat];
+        //Verif
     }
     
     public function __construct($idOrder, $idUser, $date, $heure, $adresseLivraison, $products)
