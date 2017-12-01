@@ -80,7 +80,7 @@ $action = $_GET['action'] . 'd';
     if ($_GET['action'] == 'create') {
         $bouton = "add";
     } else {
-        $bouton = "keyboard_arrow_right";
+        $bouton = "send";
     }
     ?>
     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">

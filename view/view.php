@@ -16,7 +16,8 @@
             <span class="mdl-layout-title">Doorway Gun</span>
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation mdl-layout--fixed-header">
-                <a class="mdl-navigation__link" href="index.php?controller=basket&action=read"><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="<?php if(isset($_COOKIE['basketSize'])) echo $_COOKIE['basketSize']; else echo 0;?>">shopping_basket</div></a> <!-- A modifier -->
+                <a class="mdl-navigation__link" href="index.php?controller=basket&action=read"><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="<?php if(isset($_COOKIE['basketSize'])) echo $_COOKIE['basketSize']; else echo 0;?>">shopping_basket</div></a>
+                <?php if(isset($_SESSION['login'])) echo '<a class="mdl-navigation__link" href="index.php?controller=user&action=read"><i class="material-icons">person</i></a>'; ?>
             </nav>
         </div>
     </header>
@@ -53,7 +54,7 @@
 
     <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__left-section">
-            <div class="mdl-logo">Title</div>
+            <div class="mdl-logo">Doorway Gun</div>
             <ul class="mdl-mini-footer__link-list">
                 <li><a href="#">Help</a></li>
                 <li><a href="#">Privacy & Terms</a></li>

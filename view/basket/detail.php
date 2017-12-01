@@ -15,6 +15,7 @@
     <th>Quantity</th>
     <th>Price</th>
     <th>Total Price</th>
+    <th></th>
 </tr>
 </thead>
 <tbody>

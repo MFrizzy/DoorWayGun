@@ -16,6 +16,9 @@
                 <th>IdProduct</th>
                 <th class="mdl-data-table__cell--non-numeric">Product name</th>
                 <th>Price</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

@@ -15,6 +15,8 @@
                 <th>IdUser</th>
                 <th class="mdl-data-table__cell--non-numeric">Mail</th>
                 <th class="mdl-data-table__cell--non-numeric"></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

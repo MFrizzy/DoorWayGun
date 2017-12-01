@@ -7,30 +7,61 @@
  */
 ?>
 
-<div>
-
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp users">
-        <thead>
-            <tr>
-                <th>IdUser</th>
-                <th class="mdl-data-table__cell--non-numeric">Mail</th>
-                <th class="mdl-data-table__cell--non-numeric">Activated</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            if($user->getActivated()) {$activated='<i class="material-icons">verified_user</i>';}
-            else {$activated='';}
-            echo    '<tr>
-                        <th>'.$user->getIdUser().'</th>
-                        <th class="mdl-data-table__cell--non-numeric">'.$user->getMailUser().'</th>
-                        <th class="mdl-data-table__cell--non-numeric">'.$activated.'</th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=update&idUser='.$user->getIdUser().'"><i class="material-icons">mode_edit</i></a></th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=delete&idUser='.$user->getIdUser().'"><i class="material-icons">delete</i></a></th>
-                    </tr>
-            ';
-
-        ?>
-        </tbody>
-    </table>
+<div class="detail taille">
+        <ul class="mdl-list">
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-icon">person</i>
+                    <?php echo $user->getPrenomUser()." ".$user->getNomUser() ?>
+                </span>
+            </li>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-icon">email</i>
+                    <?php echo $user->getMailUser() ?>
+                </span>
+            </li>
+            <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-icon">home</i>
+                    <?php echo $user->getAdresseUser() ?>
+                    <span class="mdl-list__item-sub-title"><?php echo $user->getNomVille()." ".$user->getCodePostal() ?></span>
+                </span>
+            </li>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-icon">verified_user</i>
+                    Compte <?php if(!$user->getActivated()) echo 'non '?>vérifié
+                </span>
+            </li>
+            <?php if($user->getAdmin()) echo'
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-icon">supervisor_account</i>
+                    Admin
+                </span>
+            </li>';
+            ?>
+        </ul>
+    <div class="detail">
+        <a href="index.php?controller=user&action=changePassword&idUser=<?php echo $user->getIdUser() ?>">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Changer mot de passe
+            </button>
+        </a>
+    </div>
+    <div class="detail">
+        <a href="index.php?controller=user&action=update&idUser=<?php echo $user->getIdUser() ?>">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Modifier mes informations
+            </button>
+        </a>
+    </div>
+    <div class="detail">
+        <a href="index.php?controller=user&action=delete&idUser=<?php echo $user->getIdUser() ?>">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Supprimer mon compte
+            </button>
+        </a>
+    </div>
 </div>

@@ -108,3 +108,12 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.save {
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.taille {
+    width:300px;
+}

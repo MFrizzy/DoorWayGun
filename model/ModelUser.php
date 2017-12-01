@@ -24,6 +24,28 @@ class ModelUser extends Model
     private $passwordUser;
     private $activated;
     private $admin;
+    private $nonce;
+
+    public static function activate($idUser) {
+        try{
+            $sql='update '.static::$object.' set activated=1 Where idUser=:idUser';
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "idUser" => $idUser
+            );
+            $req_prep->execute($values);
+            return true;
+        }
+        catch (Exception $e) { return false; }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNonce()
+    {
+        return $this->nonce;
+    }
 
     /**
      * @return mixed

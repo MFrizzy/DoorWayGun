@@ -31,7 +31,7 @@ $action=$_GET['action'].'d';
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" value="<?php echo htmlspecialchars($p->getDescription()) ?>" type="text" id="description" name="description" required>
+            <textarea class="mdl-textfield__input" type="text" id="description" rows= "5" name="description" required><?php echo htmlspecialchars($p->getDescription()) ?></textarea>
             <label class="mdl-textfield__label" for="description">Description</label>
         </div>
 
@@ -51,7 +51,7 @@ $action=$_GET['action'].'d';
     if ($_GET['action'] == 'create') {
         $bouton = "add";
     } else {
-        $bouton = "keyboard_arrow_right";
+        $bouton = "send";
     }
     ?>
     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" type="submits">

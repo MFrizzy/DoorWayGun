@@ -36,7 +36,7 @@ class ControllerUser
                 ControllerMain::erreur(33);
             } else {
                 $view = 'detail';
-                $pagetitle = 'Utilisateur ' . $id;
+                $pagetitle = 'Utilisateur : ' . $user->getPrenomUser() . ' ' . $user->getNomUser();
                 require_once File::build_path(array('view', 'view.php'));
             }
         }
@@ -143,10 +143,26 @@ class ControllerUser
         }
     }
 
-    public static function verif() {
+    public static function validate() {
         /*
          * TODO
          */
+        if(isset($_GET['idUser']) && isset($_GET['nonce'])) {
+            $user=ModelUser::select($_GET['idUser']);
+            if(!$user) ControllerMain::erreur(47);
+            else{
+                if($user->getNonce()==$_GET['nonce']) {
+                    if(!ModelUser::activate($_GET['idUser'])) ControllerMain::erreur(49);
+                    else {
+                        $view="connect";
+                        $pagetitle='Connexion';
+                        require_once File::build_path(array('view','view.php'));
+                    }
+                }
+                else ControllerMain::erreur(48);
+            }
+        }
+        else ControllerMain::erreur(46);// je crois ya déjà TODO
     }
 
     public static function update()
@@ -202,6 +218,10 @@ class ControllerUser
                     $user=ModelUser::selectByMail($_POST['login']);
                     $_SESSION['login'] = $user->getIdUser();
                     $_SESSION['is_admin'] = $user->getAdmin();
+                    /*
+                     * TODO Enregistrer que si le switch est al et true
+                     */
+                    setcookie('login',$_POST['login'],time()+7257600); // 12 semaines
                     $view = 'detail';
                     $pagetitle = 'Mon profil';
                     require_once File::build_path(array('view', 'view.php'));
