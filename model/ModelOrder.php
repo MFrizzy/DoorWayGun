@@ -83,7 +83,7 @@ class ModelOrder {
         $this->etat = $etat;
     }
 
-    public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null) {
+    public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null, $products = null) {
 
         if (!is_null($idOrder) && !is_null($idUser) && !is_null($date) && !is_null($heure) && !is_null($adresseLivraison) && !is_null($etat)) {
             $this->$idOrder = $idOrder;
@@ -92,6 +92,7 @@ class ModelOrder {
             $this->$heure = $heure;
             $this->$adresseLivraison = $adresseLivraison;
             $this->$etat = $etat;
+            $this_>$products = $products;
         }
     }
 
