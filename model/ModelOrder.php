@@ -19,6 +19,14 @@ class ModelOrder {
     private $adresseLivraison;
     private $etat;
     private $products;
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
     private static $states = array("En attente", "Validée", "Expédiée", "Livrée", "Annulée");
 
     /**
@@ -114,7 +122,7 @@ class ModelOrder {
             $rep = Model::$pdo->prepare($sql);
             $values = array("idOrder" => $idOrder);
             $rep->execute($values);
-            $rep->setFetchModel(PDO::FETCH_CLASS, 'ModelOrder');
+            $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelOrder');
             $retourne = $rep->fetchAll();
             if (empty($retourne)) {
                 return false;
@@ -124,7 +132,8 @@ class ModelOrder {
             $sql = 'SELECT idProduct,quantity FROM ProductsOrders WHERE idOrder=:idOrder';
             $rep = Model::$pdo->prepare($sql);
             $rep->execute($values);
-            $retourne->setProducts($rep->fetchAll(PDO::FETCH_OBJ));
+            $retourne->setProducts($rep->fetchAll(PDO::FETCH_ASSOC));
+            $retourne->setModelProduct();
             return $retourne;
         } catch (Exception $e) {
             return false;
@@ -147,8 +156,15 @@ class ModelOrder {
     }
     
 
-    public function save() {
-        
+    public static function save() { // static ou pas ??
+
+    }
+
+    public function setModelProduct() {
+        foreach ($this->products as $cle => $value) {
+            $this->products[$cle]['product']=ModelProduct::select($value['idProduct']);
+        }
+
     }
 
 }

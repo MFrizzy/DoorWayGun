@@ -14,7 +14,6 @@ class ControllerOrder {
 
     public static function readAll() {
         $tab = ModelOrder::selectAll();
-        //var_dump($tab);
         $view = 'list';
         $pagetitle = 'Liste des commandes';
         require_once File::build_path(array('view', 'view.php'));
@@ -34,4 +33,17 @@ class ControllerOrder {
         } else {ControllerMain::erreur(54);}
     }
 
+    public static function read() {
+        if(isset($_GET['idOrder'])) {
+            $order=ModelOrder::select($_GET['idOrder']);
+            if($order == false) ControllerMain::erreur('La commande n\'existe pas');
+            else {
+                $view='detail';
+                $pagetitle='Commande : '.$order->getIdOrder();
+                require_once File::build_path(array('view','view.php'));
+            }
+
+        }
+        else ControllerMain::erreur("Il manque des informations");
+    }
 }

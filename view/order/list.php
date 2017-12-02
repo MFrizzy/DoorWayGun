@@ -7,6 +7,7 @@
                 <th class="mdl-data-table__cell--non-numeric">Utilisateur</th>
                 <th class="mdl-data-table__cell--non-numeric">Date</th>
                 <th class="mdl-data-table__cell--non-numeric">Etat</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
