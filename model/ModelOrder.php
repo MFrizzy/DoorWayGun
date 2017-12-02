@@ -81,29 +81,56 @@ class ModelOrder
 
     public static function delete($idOrder)
     {
-
-    }
-
-    public function save()
-    {
-        //TODO WES
         try {
-            if(ModelUser::getActivated() == false) {
-                //do not save if idUser.activated = false
-            }
-            $sql = 'INSERT INTO Orders (idOrder, idUser, date, heure, adresseLivraison, products) VALUES (:idOrder, :idUser, :date, :heure, :adresseLivraison, :products)';
+            $sql = 'DELETE FROM Orders WHERE idOrder=:idOrder';
             $rep_query = Model::$pdo->prepare($sql);
             $values = array(
-                "idOrder" => $idOrder,
-                "idUser" => $idUser,
-                "date" => $date,
-                "heure" => $heure,
-                "adresseLivraison" => $adresseLivraison,
-                "products" => $products
+                "idOrder" => $idOrder
             );
             $rep_query->execute($values);
         } catch (Exception $ex) {
+            return false;
+        }
+    }
 
+    public static function selectByUser($idUser) {
+        try {
+            $sql = 'SELECT idProduct, quantity FROM ProductsOrders po JOIN Orders o ON o.idOrder = po.idOrder WHERE o.idUser=:idUser';
+            $rep_query = Model::$pdo->prepare($sql);
+            $values = array(
+                "idUser" => $idUser
+            );
+            $rep_query->execute($values);
+            $rep_query->setFetchModel(PDO::FETCH_CLASS, 'ModelOrder');
+            $tab_order = $rep_query->fetchAll();
+            return $tab_order;
+        } catch (Exception $ex) {
+            return false;
+        }
+        
+    }
+    
+    public static function save()
+    {
+        //TODO WES
+        try {
+            if(ModelUser::getActivated() == true) {
+                $sql = 'INSERT INTO Orders (idOrder, idUser, date, heure, adresseLivraison, products) VALUES (:idOrder, :idUser, :date, :heure, :adresseLivraison, :products)';
+                $rep_query = Model::$pdo->prepare($sql);
+                $values = array(
+                    "idOrder" => $this->idOrder,
+                    "idUser" => $this->idUser,
+                    "date" => $this->date,
+                    "heure" => $this->heure,
+                    "adresseLivraison" => $this->adresseLivraison,
+                    "products" => $this->products
+                );
+                $rep_query->execute($values);
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            return false;
         }
     }
 
