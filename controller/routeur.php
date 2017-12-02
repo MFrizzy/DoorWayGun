@@ -12,17 +12,17 @@ require_once File::build_path(array('controller','ControllerProduct.php'));
 require_once File::build_path(array('controller','ControllerBasket.php'));
 
 if(!isset($_GET['controller']) && !isset($_GET['action'])) ControllerProduct::readAll();
-else if(isset($_GET['controller']) && $_GET['action']) {
+else if(isset($_GET['controller']) && isset($_GET['action'])) {
     $controller_class='Controller'.ucfirst($_GET['controller']);
     if (class_exists($controller_class) && in_array($_GET['action'],get_class_methods($controller_class))) {
         $action=$_GET['action'];
         $controller_class::$action();
     }
     else {
-        ControllerMain::erreur(24);
+        ControllerMain::erreur("Controller ou action inexistant");
     }
 
 }
 else {
-    ControllerMain::erreur(25);
+    ControllerMain::erreur("Il manque des informations");
 }

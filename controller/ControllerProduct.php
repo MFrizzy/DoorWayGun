@@ -16,7 +16,7 @@ class ControllerProduct
     {
         $tab = ModelProduct::selectAll();
         if ($tab == false) {
-            ControllerMain::erreur(1);
+            ControllerMain::erreur('Impossible d\'acceder aux produits');
         } else {
             $view = 'list';
             $pagetitle = 'Accueil';
@@ -28,7 +28,7 @@ class ControllerProduct
     public static function readAllAdmin() {
         $tab = ModelProduct::selectAll();
         if ($tab == false) {
-            ControllerMain::erreur(2);
+            ControllerMain::erreur('Impossible d\'acceder aux produits');
         } else {
             $view = 'list2';
             $pagetitle = 'Listes des produits';
@@ -50,10 +50,10 @@ class ControllerProduct
             if (is_numeric($_POST['price']) && is_string($_POST['productName']) && is_string($_POST['description']) && $_FILES['image']['type'] == 'image/jpeg') {
                 $nom=ModelProduct::getLastId()+1;
                 if ($_FILES['image']['size'] > 2048000) {
-                    ControllerMain::erreur(3);
+                    ControllerMain::erreur('L\'image a une taille trop grande');
                 }
                 else if (!move_uploaded_file($_FILES['image']['tmp_name'], 'lib/img/'.$nom.'.jpg')) {
-                    ControllerMain::erreur(4);
+                    ControllerMain::erreur('Impossibl d\'enregistrer l\'image');
                 } else {
                     $data = array(
                         "productName" => $_POST["productName"],
@@ -61,12 +61,12 @@ class ControllerProduct
                         "description" => $_POST['description']
                     );
                     if(!ModelProduct::save($data)) {
-                        ControllerMain::erreur(5);
+                        ControllerMain::erreur("Impossible d'enregistrer le produit");
                     }
                     else {
                         $tab = ModelProduct::selectAll();
                         if ($tab == false) {
-                            ControllerMain::erreur(6);
+                            ControllerMain::erreur("Impossible d'acceder aux produits");
                         } else {
                             $view = 'list2';
                             $pagetitle = 'Accueil';
@@ -75,11 +75,11 @@ class ControllerProduct
                     }
                 }
             } else {
-                ControllerMain::erreur(7);
+                ControllerMain::erreur("Les informations ne sont pas valides");
             }
         }
          else {
-            ControllerMain::erreur(8);
+            ControllerMain::erreur("Il manque des informations");
         }
     }
 
@@ -90,7 +90,7 @@ class ControllerProduct
             $del=unlink('lib/img/'.$_GET['idProduct'].'.jpg');
             $tab = ModelProduct::selectAll();
             if ($tab == false || $del==false) {
-                ControllerMain::erreur(9);
+                ControllerMain::erreur("Impossible de supprimer le produit");
             } else {
                 $view = 'list2';
                 $pagetitle = 'Accueil';
@@ -98,7 +98,7 @@ class ControllerProduct
             }
         }
         else {
-            ControllerMain::erreur(10);
+            ControllerMain::erreur("Il manque des informations (produit à supprimer)");
         }
     }
 
@@ -107,13 +107,13 @@ class ControllerProduct
         if (isset($_GET["idProduct"])) {
             $produit = ModelProduct::select($_GET['idProduct']);
             if ($produit == false) {
-                ControllerMain::erreur(11);
+                ControllerMain::erreur("Le produit n'existe pas");
             } else {
                 $view = 'detail';
                 $pagetitle = $produit->getProductName();
                 require_once File::build_path(array('view', 'view.php'));
             }
-        } else {ControllerMain::erreur(12);}
+        } else ControllerMain::erreur("Il manque des informations (produit à afficher)");
 
     }
 
@@ -122,13 +122,13 @@ class ControllerProduct
         if (isset($_GET['idProduct'])) {
             $p = ModelProduct::select($_GET['idProduct']);
             if ($p == false) {
-                ControllerMain::erreur(13);
+                ControllerMain::erreur("Le produit n'existe pas");
             } else {
                 $view = 'update';
                 $pagetitle = 'Modifier ' . $p->getProductName();
                 require_once File::build_path(array('view', 'view.php'));
             }
-        } else { ControllerMain::erreur(14);}
+        } else ControllerMain::erreur("Il manque des informations (produit à modifier)");
     }
 
     public static function updated() {
@@ -143,8 +143,7 @@ class ControllerProduct
                 if(ModelProduct::update($data)) {
                     $tab = ModelProduct::selectAll();
                     if ($tab == false) {
-                        echo '3';
-                        ControllerMain::erreur(15);
+                        ControllerMain::erreur("Impossible d'acceder aux produits");
                     } else {
                         $view = 'list2';
                         $pagetitle = 'Accueil';
@@ -152,16 +151,16 @@ class ControllerProduct
                     }
                 }
                 else {
-                    ControllerMain::erreur(16);
+                    ControllerMain::erreur("Impossible de modifier le produit");
                 }
 
             }
             else {
-                ControllerMain::erreur(17);
+                ControllerMain::erreur("Les informations ne sont pas valides");
             }
         }
         else{
-            ControllerMain::erreur(18);
+            ControllerMain::erreur("Il manque des informations");
         }
     }
 
