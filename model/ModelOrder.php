@@ -18,7 +18,7 @@ class ModelOrder {
     private $heure;
     private $adresseLivraison;
     private $etat;
-//    private $products;
+    private $products = array();
     private static $states = array("En attente", "Validée", "Expédiée", "Livrée", "Annulée");
 
     /**
@@ -83,7 +83,6 @@ class ModelOrder {
         $this->etat = $etat;
     }
 
-        
     public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null) {
 
         if (!is_null($idOrder) && !is_null($idUser) && !is_null($date) && !is_null($heure) && !is_null($adresseLivraison) && !is_null($etat)) {
@@ -130,10 +129,22 @@ class ModelOrder {
             return false;
         }
     }
-    
+
     public static function selectByUser($idUser) {
-    
+        try {
+            $sql = 'SELECT * FROM Orders WHERE idUser=:idUser';
+            $rep = Model::$pdo->prepare($sql);
+            $values = array("idUser" => $idUser);
+            $rep->execute($values);
+            $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelOrder');
+            $tab = $rep->fetchAll();
+            var_dump($sql);
+            return $tab;
+        } catch (Exception $e) {
+            return false;
+        }
     }
+    
 
     public function save() {
         
