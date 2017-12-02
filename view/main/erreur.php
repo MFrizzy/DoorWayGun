@@ -6,4 +6,4 @@
  * Time: 11:06
  */
 
-echo '<h1>ERREUR :'.$erreur.'</h1>';
+echo '<h1>ERREUR : '.$erreur.'</h1>';

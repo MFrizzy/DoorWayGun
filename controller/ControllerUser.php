@@ -33,7 +33,7 @@ class ControllerUser
             $id = $_GET['idUser'];
             $user = ModelUser::select($id);
             if ($user == false) {
-                ControllerMain::erreur(33);
+                ControllerMain::erreur('L\'utilisateur n\'existe pas');
             } else {
                 $view = 'detail';
                 $pagetitle = 'Utilisateur : ' . $user->getPrenomUser() . ' ' . $user->getNomUser();
@@ -51,7 +51,7 @@ class ControllerUser
                 require_once File::build_path(array('view', 'view.php'));
             }
         }
-        else ControllerMain::erreur(34);
+        else ControllerMain::erreur('Il manque des informations, veuillez contacter un admnistrateur');
     }
 
     public static function delete()
@@ -167,6 +167,7 @@ class ControllerUser
 
     public static function update()
     {
+        // TODO pas de verif si utilisateur existe
         $p = ModelUser::select($_GET['idUser']);
         $view = 'update';
         $pagetitle = 'Modification du profil';
@@ -240,6 +241,43 @@ class ControllerUser
     {
         session_destroy();
         header('Location: index.php');
+    }
+
+    public static function changePassword() {
+        if(isset($_GET['idUser'])) {
+            $view = 'changePassword';
+            $pagetitle = 'Change son mot de passe';
+            require File::build_path(array('view', 'view.php'));
+        }
+        else ControllerMain::erreur('Il manque des inforamtions');
+    }
+
+    public static function changedPassword() {
+        if( isset($_POST['mdp']) &&
+            isset($_POST['mdp2']) &&
+            isset($_POST['mdp3']) &&
+            isset($_POST['idUser']
+            )) {
+            $a=ModelUser::select($_POST['idUser']);
+            if($a==false) ControllerMain::erreur('L\'utilisateur n\'existe pas');
+            else {
+                if(Security::chiffrer($_POST['mdp'])==$a->getPasswordUser()) {
+                    if($_POST['mdp2']==$_POST['mdp3']) {
+                        $data = array(
+                            "passwordUser" => Security::chiffrer($_POST['mdp3']),
+                            "idUser" => $_POST['idUser']
+                        );
+                        if(ModelUser::update($data)) {
+                            header('Location: index.php?controller=user&action=read&idUser='.$a->getIdUser());
+                        }
+                        else ControllerMain::erreur('Erreur de changement du mot de passe');
+                    }
+                    else ControllerMain::erreur('Nouveau mot de passe pas identiques');
+                }
+                else ControllerMain::erreur('Mauvais mot de passe');
+            }
+        }
+        else ControllerMain::erreur('Il manque des informations, veuillez re-remplir le formulaire');
     }
 
 }
