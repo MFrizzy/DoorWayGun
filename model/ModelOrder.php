@@ -18,7 +18,7 @@ class ModelOrder {
     private $heure;
     private $adresseLivraison;
     private $etat;
-    private $products = array();
+    private $products;
     private static $states = array("En attente", "Validée", "Expédiée", "Livrée", "Annulée");
 
     /**
@@ -85,7 +85,7 @@ class ModelOrder {
 
     public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null, $products = null) {
 
-        if (!is_null($idOrder) && !is_null($idUser) && !is_null($date) && !is_null($heure) && !is_null($adresseLivraison) && !is_null($etat)) {
+        if (!is_null($idOrder) && !is_null($idUser) && !is_null($date) && !is_null($heure) && !is_null($adresseLivraison) && !is_null($etat) && !is_null($products)) {
             $this->$idOrder = $idOrder;
             $this->$idUser = $idUser;
             $this->$date = $date;
