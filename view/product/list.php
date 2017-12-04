@@ -24,7 +24,7 @@ foreach ($tab as $value){
                 <div class="mdl-card__actions mdl-card--border">
                     <a href="index.php?controller=product&action=read&idProduct='.$value->getIdProduct().'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"><i class="material-icons">details</i></a>
                     <a href="index.php?controller=basket&action=add&idProduct='.$value->getIdProduct().'&quantity=1" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Ajouter au panier
+                       <i class="material-icons">add_shopping_cart</i>
                     </a>
                 </div>
             </div>';

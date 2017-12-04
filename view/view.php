@@ -16,7 +16,7 @@
             <span class="mdl-layout-title">Doorway Gun</span>
             <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation mdl-layout--fixed-header">
-                <a class="mdl-navigation__link" href="index.php?controller=basket&action=read"><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="<?php if(isset($_COOKIE['basketSize'])) echo $_COOKIE['basketSize']; else echo 0;?>">shopping_basket</div></a> <!-- A modifier -->
+                <a class="mdl-navigation__link" href="index.php?controller=basket&action=read"><div class="material-icons mdl-badge mdl-badge--overlap" data-badge="<?php if(isset($_COOKIE['basketSize'])) echo $_COOKIE['basketSize']; else echo 0;?>">shopping_cart</div></a>
             </nav>
         </div>
     </header>
