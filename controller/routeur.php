@@ -10,6 +10,7 @@ require_once File::build_path(array('controller','ControllerMain.php'));
 require_once File::build_path(array('controller','ControllerUser.php'));
 require_once File::build_path(array('controller','ControllerProduct.php'));
 require_once File::build_path(array('controller','ControllerBasket.php'));
+require_once File::build_path(array('controller','ControllerOrder.php'));
 
 if(!isset($_GET['controller']) && !isset($_GET['action'])) ControllerProduct::readAll();
 else if(isset($_GET['controller']) && isset($_GET['action'])) {
