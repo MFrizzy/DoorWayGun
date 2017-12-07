@@ -29,13 +29,12 @@
             echo    '<tr>
                         <th><a href="index.php?controller=user&action=read&idUser='.htmlspecialchars($value->getIdUser()).'">'.htmlspecialchars($value->getIdUser()).'</a></th>
                         <th class="mdl-data-table__cell--non-numeric">'.htmlspecialchars($value->getMailUser()).'</th>
-                        <th class="mdl-data-table__cell--non-numeric">'.htmlspecialchars($activated).'</th>
+                        <th class="mdl-data-table__cell--non-numeric">'.$activated.'</th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=update&idUser='.htmlspecialchars($value->getIdUser()).'"><i class="material-icons">mode_edit</i></a></th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=user&action=delete&idUser='.htmlspecialchars($value->getIdUser()).'"><i class="material-icons">delete</i></a></th>
                     </tr>
             ';
         }
-
         ?>
         </tbody>
     </table>

@@ -16,19 +16,22 @@ class ControllerUser
 
     public static function readAll()
     {
-        $tab = ModelUser::selectAll();
-        if ($tab == false) {
-            ControllerMain::erreur(38);
-        } else {
-            $view = 'list';
-            $pagetitle = 'Liste utilisateurs';
-            require_once File::build_path(array('view', 'view.php'));
+        if(isset($_SESSION['login']) && $_SESSION['is_admin']) {
+            $tab = ModelUser::selectAll();
+            if ($tab == false) {
+                ControllerMain::erreur(38);
+            } else {
+                $view = 'list';
+                $pagetitle = 'Liste utilisateurs';
+                require_once File::build_path(array('view', 'view.php'));
+            }
         }
+        else {ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");}
     }
 
     public static function read()
     {
-        if (isset($_GET['idUser']))
+        if (isset($_GET['idUser']) && isset($_SESSION['login']) && $_SESSION['is_admin'])
         {
             $id = $_GET['idUser'];
             $user = ModelUser::select($id);
@@ -36,7 +39,7 @@ class ControllerUser
                 ControllerMain::erreur('L\'utilisateur n\'existe pas');
             } else {
                 $view = 'detail';
-                $pagetitle = 'Utilisateur : ' . $user->getPrenomUser() . ' ' . $user->getNomUser();
+                $pagetitle = 'Utilisateur : ' . htmlspecialchars($user->getPrenomUser()) . ' ' . htmlspecialchars($user->getNomUser());
                 require_once File::build_path(array('view', 'view.php'));
             }
         }
@@ -51,28 +54,30 @@ class ControllerUser
                 require_once File::build_path(array('view', 'view.php'));
             }
         }
-        else ControllerMain::erreur('Il manque des informations, veuillez contacter un admnistrateur');
+        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
     public static function delete()
     {
-        if (isset($_GET['idUser'])) {
+        if (isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser']==$_SESSION['login'] )) {
             $id = $_GET['idUser'];
             $user = ModelUser::select($id);
+            if ($user == false) {
+                ControllerMain::erreur("Cet utilisateur n'existe pas");
+            }
+            else {
+                $view = 'confirm';
+                $pagetitle = 'Confirmation suppression';
+                require_once File::build_path(array('view', 'view.php'));
+            }
         }
-        if ($user == false) {
-            ControllerMain::erreur(37);
-        } else {
-            $view = 'confirm';
-            $pagetitle = 'Confirmation suppression';
-            require_once File::build_path(array('view', 'view.php'));
-        }
+        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
 
     }
 
     public static function deleted()
     {
-        if (isset($_GET['idUser'])) {
+        if (isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser']==$_SESSION['login'] )) {
             $id = $_GET['idUser'];
             $user = ModelUser::delete($id);
             if ($user == false) {
@@ -88,7 +93,7 @@ class ControllerUser
                 }
             }
         } else {
-            ControllerMain::erreur(36);
+            ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
         }
     }
 
@@ -143,10 +148,7 @@ class ControllerUser
         }
     }
 
-    public static function validate() {
-        /*
-         * TODO
-         */
+    public static function validate() { //TODO Erreurs
         if(isset($_GET['idUser']) && isset($_GET['nonce'])) {
             $user=ModelUser::select($_GET['idUser']);
             if(!$user) ControllerMain::erreur(47);
@@ -162,21 +164,24 @@ class ControllerUser
                 else ControllerMain::erreur(48);
             }
         }
-        else ControllerMain::erreur(46);// je crois ya déjà TODO
+        else ControllerMain::erreur(46);
     }
 
     public static function update()
     {
-        // TODO pas de verif si utilisateur existe
-        $p = ModelUser::select($_GET['idUser']);
-        $view = 'update';
-        $pagetitle = 'Modification du profil';
-        require_once File::build_path(array('view', 'view.php'));
+        if(isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser']==$_SESSION['login'])) {
+            $p = ModelUser::select($_GET['idUser']);
+            if(!$p) ControllerMain::erreur("Cet utilisateur n'existe pas");
+            $view = 'update';
+            $pagetitle = 'Modification du profil';
+            require_once File::build_path(array('view', 'view.php'));
+        }
+        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
     public static function updated()
     {
-        if (isset($_POST['nomUser']) && isset($_POST['prenomUser']) && isset($_POST['mailUser']) && isset($_POST['adresseUser']) && isset($_POST['nomVille']) && isset($_POST['codePostal'])) {
+        if (isset($_POST['nomUser']) && isset($_POST['prenomUser']) && isset($_POST['mailUser']) && isset($_POST['adresseUser']) && isset($_POST['nomVille']) && isset($_POST['codePostal']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_POST['idUser']==$_SESSION['login'])) {
             if (is_string($_POST['nomUser']) && is_string($_POST['prenomUser']) && is_string($_POST['mailUser']) && is_string($_POST['adresseUser']) && is_string($_POST['nomVille']) && is_numeric($_POST['codePostal'])) {
                 $data = array(
                     "nomUser" => $_POST['nomUser'],
@@ -244,20 +249,19 @@ class ControllerUser
     }
 
     public static function changePassword() {
-        if(isset($_GET['idUser'])) {
+        if(isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser']==$_SESSION['login'])) {
             $view = 'changePassword';
             $pagetitle = 'Change son mot de passe';
             require File::build_path(array('view', 'view.php'));
         }
-        else ControllerMain::erreur('Il manque des inforamtions');
+        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
     public static function changedPassword() {
         if( isset($_POST['mdp']) &&
             isset($_POST['mdp2']) &&
             isset($_POST['mdp3']) &&
-            isset($_POST['idUser']
-            )) {
+            isset($_POST['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_POST['idUser']==$_SESSION['login'])) {
             $a=ModelUser::select($_POST['idUser']);
             if($a==false) ControllerMain::erreur('L\'utilisateur n\'existe pas');
             else {
@@ -277,7 +281,7 @@ class ControllerUser
                 else ControllerMain::erreur('Mauvais mot de passe');
             }
         }
-        else ControllerMain::erreur('Il manque des informations, veuillez re-remplir le formulaire');
+        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
 }
