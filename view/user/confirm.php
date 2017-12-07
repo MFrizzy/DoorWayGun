@@ -12,7 +12,7 @@
     <p>Êtes-vous sûr de vouloir nous quitter?</p>
     <p>
     <?php echo
-    '<a href="index.php?controller=user&action=deleted&idUser='.$user->getIdUser().'"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Confirmer</button></a>';
+    '<a href="index.php?controller=user&action=deleted&idUser='.htmlspecialchars($user->getIdUser()).'"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Confirmer</button></a>';
     ?>
     </p>
 </div>

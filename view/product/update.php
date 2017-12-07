@@ -15,7 +15,7 @@ $action=$_GET['action'].'d';
             <?php
             if($_GET['action']=='create') echo 'Creation d\'un nouveau produit :';
             else { echo 'Modification d\'un produit :';
-            echo '<input name="idProduct" type="hidden" value="'.$_GET['idProduct'].'">';
+            echo '<input name="idProduct" type="hidden" value="'.htmlspecialchars($_GET['idProduct']).'">';
             }
             ?>
             </h3></legend>

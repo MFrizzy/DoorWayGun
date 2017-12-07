@@ -26,13 +26,13 @@
 
         foreach ($tab as $value) {
             echo    '<tr>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=read&idProduct='.$value->getIdProduct().'"><i class="material-icons">expand_more</i></a></th>
-                        <th>'.$value->getIdProduct().'</th>
-                        <th class="mdl-data-table__cell--non-numeric">'.$value->getProductName().'</th>
-                        <th>'.$value->getPrice().'</th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=update&idProduct='.$value->getIdProduct().'"><i class="material-icons">mode_edit</i></a></th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=updataImg&idProduct='.$value->getIdProduct().'"><i class="material-icons">add_a_photo</i></a></th> 
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=delete&idProduct='.$value->getIdProduct().'"><i class="material-icons">delete</i></a></th>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=read&idProduct='.htmlspecialchars($value->getIdProduct()).'"><i class="material-icons">expand_more</i></a></th>
+                        <th>'.htmlspecialchars($value->getIdProduct()).'</th>
+                        <th class="mdl-data-table__cell--non-numeric">'.htmlspecialchars($value->getProductName()).'</th>
+                        <th>'.htmlspecialchars($value->getPrice()).'</th>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=update&idProduct='.htmlspecialchars($value->getIdProduct()).'"><i class="material-icons">mode_edit</i></a></th>
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=updataImg&idProduct='.htmlspecialchars($value->getIdProduct()).'"><i class="material-icons">add_a_photo</i></a></th> 
+                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=delete&idProduct='.htmlspecialchars($value->getIdProduct()).'"><i class="material-icons">delete</i></a></th>
                     </tr>
             ';
         }

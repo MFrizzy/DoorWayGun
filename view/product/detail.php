@@ -23,7 +23,7 @@
                     </p>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a href="index.php?controller=basket&action=add&idProduct=<?php echo $produit->getIdProduct()?>&quantity=1" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    <a href="index.php?controller=basket&action=add&idProduct=<?php echo htmlspecialchars($produit->getIdProduct())?>&quantity=1" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                         Ajouter au panier
                     </a>
                 </div>

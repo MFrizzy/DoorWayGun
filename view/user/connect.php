@@ -14,7 +14,7 @@
 
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" value="<?php if(isset($_COOKIE['login'])) echo $_COOKIE['login'] ?>" type="email" id="login" name="login" required>
+        <input class="mdl-textfield__input" value="<?php if(isset($_COOKIE['login'])) echo htmlspecialchars($_COOKIE['login']) ?>" type="email" id="login" name="login" required>
         <label class="mdl-textfield__label" for="login">E-mail</label>
     </div>
 

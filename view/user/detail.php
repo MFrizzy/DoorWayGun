@@ -12,20 +12,20 @@
             <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
                     <i class="material-icons mdl-list__item-icon">person</i>
-                    <?php echo $user->getPrenomUser()." ".$user->getNomUser() ?>
+                    <?php echo htmlspecialchars($user->getPrenomUser()." ".$user->getNomUser()) ?>
                 </span>
             </li>
             <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
                     <i class="material-icons mdl-list__item-icon">email</i>
-                    <?php echo $user->getMailUser() ?>
+                    <?php echo htmlspecialchars($user->getMailUser()) ?>
                 </span>
             </li>
             <li class="mdl-list__item mdl-list__item--two-line">
                 <span class="mdl-list__item-primary-content">
                     <i class="material-icons mdl-list__item-icon">home</i>
-                    <?php echo $user->getAdresseUser() ?>
-                    <span class="mdl-list__item-sub-title"><?php echo $user->getNomVille()." ".$user->getCodePostal() ?></span>
+                    <?php echo htmlspecialchars($user->getAdresseUser()) ?>
+                    <span class="mdl-list__item-sub-title"><?php echo $user->getNomVille()." ".htmlspecialchars($user->getCodePostal()) ?></span>
                 </span>
             </li>
             <li class="mdl-list__item">
@@ -44,21 +44,21 @@
             ?>
         </ul>
     <div class="detail">
-        <a href="index.php?controller=user&action=changePassword&idUser=<?php echo $user->getIdUser() ?>">
+        <a href="index.php?controller=user&action=changePassword&idUser=<?php echo htmlspecialchars($user->getIdUser()) ?>">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                 Changer mot de passe
             </button>
         </a>
     </div>
     <div class="detail">
-        <a href="index.php?controller=user&action=update&idUser=<?php echo $user->getIdUser() ?>">
+        <a href="index.php?controller=user&action=update&idUser=<?php echo htmlspecialchars($user->getIdUser()) ?>">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                 Modifier mes informations
             </button>
         </a>
     </div>
     <div class="detail">
-        <a href="index.php?controller=user&action=delete&idUser=<?php echo $user->getIdUser() ?>">
+        <a href="index.php?controller=user&action=delete&idUser=<?php echo htmlspecialchars($user->getIdUser()) ?>">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                 Supprimer mon compte
             </button>
