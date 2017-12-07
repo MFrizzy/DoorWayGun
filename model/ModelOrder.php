@@ -8,7 +8,8 @@
  */
 require_once File::build_path(array('model', 'Model.php'));
 
-class ModelOrder {
+class ModelOrder
+{
 
     protected static $object = 'Orders';
     protected static $primary = 'idOrder';
@@ -27,71 +28,87 @@ class ModelOrder {
     {
         return $this->products;
     }
+
     private static $states = array("En attente", "Validée", "Expédiée", "Livrée", "Annulée");
 
     /**
      * @param mixed $products
      */
-    public function setProducts($products) {
+    public function setProducts($products)
+    {
         $this->products = $products;
     }
 
 // C le tableau du parametres products du panier lol ez pz
 
-    function getIdOrder() {
+    function getIdOrder()
+    {
         return $this->idOrder;
     }
 
-    function getIdUser() {
+    function getIdUser()
+    {
         return $this->idUser;
     }
 
-    function getDate() {
+    function getDate()
+    {
         return $this->date;
     }
 
-    function getHeure() {
+    function getHeure()
+    {
         return $this->heure;
     }
 
-    function getAdresseLivraison() {
+    function getAdresseLivraison()
+    {
         return $this->adresseLivraison;
     }
 
-    function setIdOrder($idOrder) {
+    function setIdOrder($idOrder)
+    {
         $this->idOrder = $idOrder;
     }
 
-    function setIdUser($idUser) {
+    function setIdUser($idUser)
+    {
         $this->idUser = $idUser;
     }
 
-    function setDate($date) {
+    function setDate($date)
+    {
         $this->date = $date;
     }
 
-    function setHeure($heure) {
+    function setHeure($heure)
+    {
         $this->heure = $heure;
     }
 
-    function setAdresseLivraison($adresseLivraison) {
+    function setAdresseLivraison($adresseLivraison)
+    {
         $this->adresseLivraison = $adresseLivraison;
     }
 
-    public function getState() {
+    public function getState()
+    {
         return static::$states[$this->etat];
         //A Verif
     }
 
-    function getEtat() {
+    function getEtat()
+    {
         return $this->etat;
     }
 
-    function setEtat($etat) {
+    function setEtat($etat)
+    {
         $this->etat = $etat;
     }
 
-    public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null, $products = null) {
+    public function __construct($idOrder = null, $idUser = null, $date = null, $heure = null, $adresseLivraison = null, $etat = null, $products = null)
+    {
 
         if (!is_null($idOrder) && !is_null($idUser) && !is_null($date) && !is_null($heure) && !is_null($adresseLivraison) && !is_null($etat) && !is_null($products)) {
             $this->$idOrder = $idOrder;
@@ -100,11 +117,12 @@ class ModelOrder {
             $this->$heure = $heure;
             $this->$adresseLivraison = $adresseLivraison;
             $this->$etat = $etat;
-            $this_>$products = $products;
+            $this_ > $products = $products;
         }
     }
 
-    public static function selectAll() {
+    public static function selectAll()
+    {
         try {
             $sql = 'SELECT * FROM Orders ';
             $rep = Model::$pdo->prepare($sql);
@@ -116,7 +134,8 @@ class ModelOrder {
         }
     }
 
-    public static function select($idOrder) {
+    public static function select($idOrder)
+    {
         try {
             $sql = 'SELECT * FROM Orders WHERE idOrder=:idOrder';
             $rep = Model::$pdo->prepare($sql);
@@ -140,7 +159,8 @@ class ModelOrder {
         }
     }
 
-    public static function selectByUser($idUser) {
+    public static function selectByUser($idUser)
+    {
         try {
             $sql = 'SELECT * FROM Orders WHERE idUser=:idUser';
             $rep = Model::$pdo->prepare($sql);
@@ -153,15 +173,17 @@ class ModelOrder {
             return false;
         }
     }
-    
 
-    public static function save() { // static ou pas ??
+
+    public static function save()
+    { // static ou pas ??
 
     }
 
-    public function setModelProduct() {
+    public function setModelProduct()
+    {
         foreach ($this->products as $cle => $value) {
-            $this->products[$cle]['product']=ModelProduct::select($value['idProduct']);
+            $this->products[$cle]['product'] = ModelProduct::select($value['idProduct']);
         }
 
     }

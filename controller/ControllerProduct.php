@@ -20,12 +20,13 @@ class ControllerProduct
         } else {
             $view = 'list';
             $pagetitle = 'Accueil';
-            $produit_cree=false;
+            $produit_cree = false;
             require_once File::build_path(array('view', 'view.php'));
         }
     }
 
-    public static function readAllAdmin() {
+    public static function readAllAdmin()
+    {
         if (isset($_SESSION['login']) && $_SESSION['is_admin']) {
             $tab = ModelProduct::selectAll();
             if ($tab == false) {
@@ -35,8 +36,7 @@ class ControllerProduct
                 $pagetitle = 'Listes des produits';
                 require_once File::build_path(array('view', 'view.php'));
             }
-        }
-        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
+        } else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
     public static function create()
@@ -46,8 +46,7 @@ class ControllerProduct
             $pagetitle = 'Créer un nouveau produit';
             $p = new ModelProduct();
             require File::build_path(array('view', 'view.php'));
-        }
-        else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
+        } else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
     public static function created()
@@ -82,27 +81,25 @@ class ControllerProduct
                 } else {
                     ControllerMain::erreur("Les informations ne sont pas valides");
                 }
-            }
-            else ControllerMain::erreur("Il manque des informations");
-        }
-         else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
+            } else ControllerMain::erreur("Il manque des informations");
+        } else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
 
-    public static function delete() {
-        if(isset($_GET['idProduct']) && isset($_SESSION['login']) && $_SESSION['is_admin']) {
+    public static function delete()
+    {
+        if (isset($_GET['idProduct']) && isset($_SESSION['login']) && $_SESSION['is_admin']) {
             ModelProduct::delete($_GET['idProduct']);
             error_reporting(0);
-            $del=unlink('lib/img/'.$_GET['idProduct'].'.jpg');
+            $del = unlink('lib/img/' . $_GET['idProduct'] . '.jpg');
             $tab = ModelProduct::selectAll();
-            if ($tab == false || $del==false) {
+            if ($tab == false || $del == false) {
                 ControllerMain::erreur("Impossible de supprimer le produit");
             } else {
                 $view = 'list2';
                 $pagetitle = 'Accueil';
                 require_once File::build_path(array('view', 'view.php'));
             }
-        }
-        else {
+        } else {
             ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
         }
     }
@@ -136,7 +133,8 @@ class ControllerProduct
         } else ControllerMain::erreur("Il manque des informations (produit à modifier)");
     }
 
-    public static function updated() {
+    public static function updated()
+    {
         if (isset($_SESSION['login']) && $_SESSION['is_admin']) {
             if (isset($_POST['productName']) && isset($_POST['price']) && isset($_POST['description']) && isset($_POST['idProduct'])) {
                 if (is_numeric($_POST['price']) && is_string($_POST['productName']) && is_string($_POST['description']) && is_numeric($_POST['idProduct'])) {
