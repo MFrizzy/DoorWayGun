@@ -203,11 +203,15 @@ class ControllerUser
 
     public static function connect()
     {
-        $view = 'connect';
-        $pagetitle = 'Connexion';
-        $mauvais_mdp = false;
-        require File::build_path(array('view', 'view.php'));
+        if(!isset($_SESSION['login'])) {
+            $view = 'connect';
+            $pagetitle = 'Connexion';
+            $mauvais_mdp = false;
+            require File::build_path(array('view', 'view.php'));
+        }
+        else ControllerMain::erreur("Vous êtes déjà connecté");
     }
+
 
     public static function connected()
     {

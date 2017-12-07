@@ -29,7 +29,7 @@ class ControllerOrder
 
     public static function readAllByUser()
     {
-        if (isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser']==$_SESSION['login'])) {
+        if (isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'] || $_GET['idUser'] == $_SESSION['login'])) {
             $id = $_GET['idUser'];
             $tab = ModelOrder::selectByUser($id);
             if (count($tab) == 0) {
@@ -64,12 +64,11 @@ class ControllerOrder
             $order = ModelOrder::select($_GET['idOrder']);
             if ($order == false) ControllerMain::erreur('La commande n\'existe pas');
             else {
-                if($order->getIdUser()==$_SESSION['login'] || $_SESSION['is_admin']) {
+                if ($order->getIdUser() == $_SESSION['login'] || $_SESSION['is_admin']) {
                     $view = 'detail';
                     $pagetitle = 'Commande : ' . $order->getIdOrder();
                     require_once File::build_path(array('view', 'view.php'));
-                }
-                else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
+                } else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
             }
 
         } else ControllerMain::erreur("Il manque des informations");
