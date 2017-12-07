@@ -33,7 +33,21 @@ class ControllerOrder {
                 $pagetitle = 'Commandes de '.$id;
                 require_once File::build_path(array('view', 'view.php'));
             }
-        } else {ControllerMain::erreur(54);}
+        } elseif (isset($_SESSION['login'])) {
+            $id = $_SESSION['login'];
+            $tab = ModelOrder::selectByUser($id);
+            if(count($tab)==0) {
+                ControllerMain::erreur("T'as pas fait de commandes");
+            }
+            else if($tab == false) {
+                ControllerMain::erreur(53);
+            } else {
+                $view = 'listByUser';
+                $pagetitle = 'Commandes de '.$id;
+                require_once File::build_path(array('view', 'view.php'));
+            }
+        }
+        else {ControllerMain::erreur(54);}
     }
 
     public static function read() {

@@ -204,7 +204,7 @@ class ModelUser extends Model
         if (!is_null($id) && !is_null($mail) && !is_null($password)) {
             $this->idUser = $id;
             $this->mailUser = $mail;
-            $this->passwordUser = $password; //TODO crypter mdp
+            $this->passwordUser = $password;
         }
     }
 
@@ -233,6 +233,20 @@ class ModelUser extends Model
             return $tab[0];
         }
         catch (Exception $e) {return false;}
+    }
+
+    public static function exist($primary) {
+        try {
+            $sql='select count(*) from User where idUser='.$primary;
+            $rep=Model::$pdo->prepare($sql);
+            $rep->execute();
+            $donnee=$rep->fetchAll(PDO::FETCH_ASSOC);
+            $retourne=$donnee[0];
+            return (int)$retourne["count(*)"];
+        }
+        catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
 }
