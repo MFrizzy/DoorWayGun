@@ -53,7 +53,7 @@ if(count($tab)==0) echo '<h1>PANIER VIDE</h1>';
 <?php
 
 if(count($tab)!=0) {
-    echo '<div class="achat"><a href="index.php?controller=product&action=readAll" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+    echo '<div class="achat"><a href="index.php?controller=order&action=create" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
   Passer la commande
 </button></a> <a href="index.php" class="bouton"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
   Continuer mes achats

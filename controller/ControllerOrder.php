@@ -73,4 +73,51 @@ class ControllerOrder
 
         } else ControllerMain::erreur("Il manque des informations");
     }
+
+    public static function create()
+    {
+        $basket = ModelBasket::getBasket();
+        if (empty($basket->getProducts())) ControllerMain::erreur("Votre panier est vide");
+        else if (!isset($_SESSION['login'])) ControllerUser::connect();
+        else {
+            $user = ModelUser::select($_SESSION['login']);
+            if (!$user->getActivated()) {
+                // TODO Mail
+                ControllerMain::erreur("Veuillez activer votre compte grace au mail que nous venons de vous envoyer");
+            } else {
+                $view = 'create';
+                $pagetitle = 'Commander';
+                require File::build_path(array('view', 'view.php'));
+            }
+
+        }
+    }
+
+    public static function created()
+    {
+        if (!isset($_SESSION['login'])) ControllerUser::connect();
+        else {
+            if (isset($_POST['adresse']) &&
+                isset($_POST['codePostal']) &&
+                isset($_POST['ville'])) {
+                if (is_string($_POST['adresse']) &&
+                    is_string($_POST['ville']) &&
+                    is_numeric($_POST['codePostal'])) {
+                    $order = new ModelOrder();
+                    $order->setAdresseLivraison($_POST['adresse'] . ' ' . $_POST['codePostal'] . ' ' . $_POST['ville']);
+                    $order->setIdUser($_SESSION['login']);
+                    $basket=ModelBasket::getBasket();
+                    if (!$basket || empty($basket->getProducts())) ControllerMain::erreur("Votre panier est vide");
+                    else {
+                        $order->setProducts($basket->getProducts());
+                        if($order->save()) ControllerOrder::readAllByUser();
+                        else ControllerMain::erreur("Impossible de passer la commande");
+                    }
+                }
+                else ControllerMain::erreur('Les types des paramètres ne sont pas bons');
+            }
+            else ControllerMain::erreur("Il manque des informations");
+        }
+    }
+
 }

@@ -174,18 +174,48 @@ class ModelOrder
         }
     }
 
-
-    public static function save()
-    { // static ou pas ??
-
-    }
-
     public function setModelProduct()
     {
         foreach ($this->products as $cle => $value) {
             $this->products[$cle]['product'] = ModelProduct::select($value['idProduct']);
         }
 
+    }
+
+    public function save()
+    {
+        try {
+            $sql = 'INSERT INTO Orders (idUser, date, heure, adresseLivraison) VALUES (:idUser, CURRENT_DATE, CURRENT_TIME, :adresseLivraison)';
+            $rep_query = Model::$pdo->prepare($sql);
+            $values = array(
+                "idUser" => $this->idUser,
+                "adresseLivraison" => $this->adresseLivraison
+            );
+            $rep_query->execute($values);
+            foreach ($this->products as $value) {
+                $sql = 'INSERT INTO ProductsOrders (idProduct, idOrder, quantity) VALUES (:idProduct, :idOrder, :quantity)';
+                $rep_query = Model::$pdo->prepare($sql);
+                $values = array(
+                    "idProduct" => $value[0],
+                    "idOrder" => static::getMaxIdOrder(),
+                    "quantity" => $value[1]
+                );
+                $rep_query->execute($values);
+            }
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+
+    public static function getMaxIdOrder()
+    {
+        $sql = 'SELECT MAX(idOrder) FROM Orders';
+        $rep_query = Model::$pdo->prepare($sql);
+        $rep_query->execute();
+        $donne = $rep_query->fetchAll(PDO::FETCH_ASSOC);
+        $retourne = $donne[0];
+        return (int)$retourne["MAX(idOrder)"];
     }
 
 }
