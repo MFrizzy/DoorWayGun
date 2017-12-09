@@ -106,7 +106,8 @@ class ControllerUser
             if (is_string($_POST['nomUser']) && is_string($_POST['prenomUser']) && is_string($_POST['mailUser']) && is_string($_POST['passwordUser']) && is_string($_POST['adresseUser']) && is_string($_POST['nomVille']) && is_numeric($_POST['codePostal']) && is_string($_POST['passwordUser2']) && is_string($_POST['idUser'])) {
                 if (!filter_var($_POST['mailUser'], FILTER_VALIDATE_EMAIL)) {
                     ControllerMain::erreur(45);
-                } else {
+                }elseif (ModelUser::selectByMail($_POST['mailUser'])!=false)  ControllerMain::erreur('Cette adresse mail est déjà utilisé dans le site');
+                else {
                     if ($_POST['passwordUser'] == $_POST['passwordUser2']) {
                         $data = array(
                             'nomUser' => $_POST['nomUser'],
@@ -121,8 +122,9 @@ class ControllerUser
                         if (!ModelUser::save($data)) {
                             ControllerMain::erreur(19);
                         } else {
-                            $mail = 'Veuillez activer votre compte : <a href=\'webinfo.iutmontp.univ-montp2.fr/~thomast/index.php?controller=user&action=verif&nonce=' . $data['nonce'] . '\'>Cliquez-ici</a>';
-                            //mail($data['mailUser'],'Activer votre compte DoorWay Gun',$mail);
+                            $user=ModelUser::selectByMail($_POST['mailUser']);
+                            $mail = '<h1>Bienvenue sur notre site,</h1> <br> Veuillez activer votre compte : <a href=\'http://webinfo.iutmontp.univ-montp2.fr/~ducreta/eCommerce/index.php?controller=user&idUser='.$user->getIdUser().'&action=validate&nonce=' . $data['nonce'] . '\'>Cliquez-ici</a>';
+                            mail($data['mailUser'],'Activer votre compte DoorWay Gun',$mail);
                             /*
                              *  TODO : Verif si mail fonctionne
                              */
