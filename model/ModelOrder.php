@@ -147,7 +147,6 @@ class ModelOrder
                 return false;
             }
             $retourne = $retourne[0];
-            // TODO : Partie 2 : remplir le tableau $products de $retourne avec les produits de la commande
             $sql = 'SELECT idProduct,quantity FROM ProductsOrders WHERE idOrder=:idOrder';
             $rep = Model::$pdo->prepare($sql);
             $rep->execute($values);
