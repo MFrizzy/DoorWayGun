@@ -37,7 +37,7 @@ class ControllerOrder
             } else if ($tab == false) {
                 ControllerMain::erreur(53);
             } else {
-                $view = 'listByUser';
+                $view = 'list';
                 $pagetitle = 'Commandes de ' . $id;
                 require_once File::build_path(array('view', 'view.php'));
             }
@@ -49,7 +49,7 @@ class ControllerOrder
             } else if ($tab == false) {
                 ControllerMain::erreur(53);
             } else {
-                $view = 'listByUser';
+                $view = 'list';
                 $pagetitle = 'Commandes de ' . $id;
                 require_once File::build_path(array('view', 'view.php'));
             }
