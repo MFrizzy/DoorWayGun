@@ -117,7 +117,7 @@ class ModelOrder
             $this->$heure = $heure;
             $this->$adresseLivraison = $adresseLivraison;
             $this->$etat = $etat;
-            $this_ > $products = $products;
+            $this->$products = $products;
         }
     }
 
