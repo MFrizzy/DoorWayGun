@@ -248,5 +248,18 @@ class ModelUser extends Model
             return $e->getMessage();
         }
     }
+    
+    public static function setAdmin($idUser){
+        try {
+            $sql='UPDATE User SET admin=1 WHERE idUser=:idUser';
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "idUser" => $idUser
+            );
+            $req_prep->execute($values);
+            return true;
+        }
+        catch (Exception $e) {return false;}
+    }
 
 }

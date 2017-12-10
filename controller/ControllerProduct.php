@@ -73,7 +73,7 @@ class ControllerProduct
                                 ControllerMain::erreur("Impossible d'acceder aux produits");
                             } else {
                                 $view = 'list2';
-                                $pagetitle = 'Accueil';
+                                $pagetitle = 'Liste des produits';
                                 require_once File::build_path(array('view', 'view.php'));
                             }
                         }
