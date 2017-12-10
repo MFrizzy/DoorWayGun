@@ -279,5 +279,14 @@ class ControllerUser
             }
         } else ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
     }
+    
+    public static function setAdmin() {
+        if (isset($_GET['idUser']) && isset($_SESSION['login']) && ($_SESSION['is_admin'])) {
+            if(ModelUser::setAdmin($_GET['idUser'])) {
+                ControllerUser::readAll();
+            }
+            else ControllerMain::erreur("Quelque chose s'est mal passé");
+        } else ControllerMain::erreur("Vous n'avez pas le droit de réaliser cette action");
+    }
 
 }
