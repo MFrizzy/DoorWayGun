@@ -117,3 +117,9 @@ h1 {
 .taille {
     width:300px;
 }
+
+.list {
+    margin:auto;
+    margin-top: 15px;
+    text-align: center;
+}
