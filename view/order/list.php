@@ -18,7 +18,6 @@
                         <th><a href="index.php?controller=order&action=readAllByUser&idUser=' . $value->getIdUser() . '">' . $value->getIdUser() . '</a></th>
                         <th>' . $value->getDate() . '</th>
                         <th>' . $value->getState() . '</th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=order&action=update&idOrder=' . $value->getIdOrder() . '"><i class="material-icons">mode_edit</i></a></th>
                     </tr>
             ';
             }
