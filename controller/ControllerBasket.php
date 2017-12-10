@@ -23,16 +23,16 @@ class ControllerBasket
     public static function add() {
         if(isset($_GET['idProduct']) && isset($_GET['quantity'])) {
             $exist=ModelProduct::exist($_GET['idProduct']);
-            if($exist==0) ControllerMain::erreur(42);
+            if($exist==0) ControllerMain::erreur("Le produit n'existe pas");
             else if($exist==1 && is_numeric($_GET['quantity'])) {
                 $basket=ModelBasket::getBasket();
                 $basket->add($_GET['idProduct'],$_GET['quantity']);
                 $basket->save();
                 header('location: index.php?controller=basket&action=read');
             }
-            else ControllerMain::erreur(43);
+            else ControllerMain::erreur("Les informations ne sont pas conformes");
         }
-        else ControllerMain::erreur(41);
+        else ControllerMain::erreur("Il manque des informations");
     }
 
     public static function remove() {
@@ -43,7 +43,7 @@ class ControllerBasket
             header('location: index.php?controller=basket&action=read');
         }
         else {
-            ControllerMain::erreur(44);
+            ControllerMain::erreur("Il manque des informations");
         }
     }
 
