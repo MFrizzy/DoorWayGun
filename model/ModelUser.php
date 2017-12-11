@@ -251,6 +251,7 @@ class ModelUser extends Model
     
     public static function setAdmin($idUser){
         try {
+            ModelUser::activate($idUser);
             $sql='UPDATE User SET admin=1 WHERE idUser=:idUser';
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
