@@ -19,7 +19,7 @@ class ControllerUser
         if (isset($_SESSION['login']) && $_SESSION['is_admin']) {
             $tab = ModelUser::selectAll();
             if ($tab == false) {
-                ControllerMain::erreur(38);
+                ControllerMain::erreur("Il n'y a pas d'utilisateurs");
             } else {
                 $view = 'list';
                 $pagetitle = 'Liste utilisateurs';
@@ -45,7 +45,7 @@ class ControllerUser
         } elseif (isset($_SESSION['login'])) {
             $user = ModelUser::select($_SESSION['login']);
             if ($user == false) {
-                ControllerMain::erreur(33);
+                ControllerMain::erreur("Votre compte a été supprimé");
             } else {
                 $view = 'detail';
                 $pagetitle = 'Mon Compte';
@@ -76,16 +76,9 @@ class ControllerUser
             $id = $_GET['idUser'];
             $user = ModelUser::delete($id);
             if ($user == false) {
-                ControllerMain::erreur(35);
+                ControllerMain::erreur("Impossible de supprimer l'utilisateur");
             } else {
-                $tab = ModelUser::selectAll();
-                if ($tab == false) {
-                    ControllerMain::erreur(39);
-                } else {
-                    $view = 'list';
-                    $pagetitle = 'Liste utilisateurs';
-                    require_once File::build_path(array('view', 'view.php'));
-                }
+                ControllerProduct::readAll();
             }
         } else {
             ControllerMain::erreur("Vous n'avez pas le droit de voir cette page");
@@ -105,7 +98,7 @@ class ControllerUser
         if (isset($_POST['nomUser']) && isset($_POST['prenomUser']) && isset($_POST['mailUser']) && isset($_POST['passwordUser']) && isset($_POST['adresseUser']) && isset($_POST['nomVille']) && isset($_POST['codePostal']) && isset($_POST['passwordUser2']) && isset($_POST['idUser'])) {
             if (is_string($_POST['nomUser']) && is_string($_POST['prenomUser']) && is_string($_POST['mailUser']) && is_string($_POST['passwordUser']) && is_string($_POST['adresseUser']) && is_string($_POST['nomVille']) && is_numeric($_POST['codePostal']) && is_string($_POST['passwordUser2']) && is_string($_POST['idUser'])) {
                 if (!filter_var($_POST['mailUser'], FILTER_VALIDATE_EMAIL)) {
-                    ControllerMain::erreur(45);
+                    ControllerMain::erreur("Adresse mail invalide");
                 }elseif (ModelUser::selectByMail($_POST['mailUser'])!=false)  ControllerMain::erreur('Cette adresse mail est déjà utilisé dans le site');
                 else {
                     if ($_POST['passwordUser'] == $_POST['passwordUser2']) {
@@ -120,47 +113,43 @@ class ControllerUser
                             'nonce' => Security::generateRandomHex()
                         );
                         if (!ModelUser::save($data)) {
-                            ControllerMain::erreur(19);
+                            ControllerMain::erreur("Impossible d'inscrire l'utilisateur");
                         } else {
                             $user=ModelUser::selectByMail($_POST['mailUser']);
                             $mail = '<h1>Bienvenue sur notre site,</h1> <br> Veuillez activer votre compte : <a href=\'http://webinfo.iutmontp.univ-montp2.fr/~ducreta/eCommerce/index.php?controller=user&idUser='.$user->getIdUser().'&action=validate&nonce=' . $data['nonce'] . '\'>Cliquez-ici</a>';
                             mail($data['mailUser'],'Activer votre compte DoorWay Gun',$mail);
-                            /*
-                             *  TODO : Verif si mail fonctionne
-                             */
                             $view = 'connect';
                             $pagetitle = 'Connexion';
                             require_once File::build_path(array('view', 'view.php'));
                         }
                     } else {
-                        ControllerMain::erreur(21);
-                        // TODO redirect vers page connexion avec variable $mauvais_mdp=true;
+                        ControllerUser::connect();
                     }
                 }
             } else {
-                ControllerMain::erreur(22);
+                ControllerMain::erreur("Il manque des informations");
             }
         } else {
-            ControllerMain::erreur(23);
+            ControllerMain::erreur("Les informations ne sont pas valides");
         }
     }
 
     public static function validate()
-    { //TODO Erreurs
+    {
         if (isset($_GET['idUser']) && isset($_GET['nonce'])) {
             $user = ModelUser::select($_GET['idUser']);
-            if (!$user) ControllerMain::erreur(47);
+            if (!$user) ControllerMain::erreur("Utilisateur inexistant");
             else {
                 if ($user->getNonce() == $_GET['nonce']) {
-                    if (!ModelUser::activate($_GET['idUser'])) ControllerMain::erreur(49);
+                    if (!ModelUser::activate($_GET['idUser'])) ControllerMain::erreur("Impossible d'activer l'utilisateur");
                     else {
                         $view = "connect";
                         $pagetitle = 'Connexion';
                         require_once File::build_path(array('view', 'view.php'));
                     }
-                } else ControllerMain::erreur(48);
+                } else ControllerMain::erreur("Impossible d'activer l'utilisateur");
             }
-        } else ControllerMain::erreur(46);
+        } else ControllerMain::erreur("Il manque des informations");
     }
 
     public static function update()
@@ -188,7 +177,7 @@ class ControllerUser
                     "idUser" => $_POST['idUser']
                 );
                 if (!ModelUser::update($data)) {
-                    ControllerMain::erreur(32);
+                    ControllerMain::erreur("Impossible d'enregistrer les modifications");
                 } else {
                     $view = 'detail';
                     $pagetitle = 'Profil';
@@ -196,10 +185,10 @@ class ControllerUser
                     require_once File::build_path(array('view', 'view.php'));
                 }
             } else {
-                ControllerMain::erreur(31);
+                ControllerMain::erreur("Les informations ne sont pas valide");
             }
         } else {
-            ControllerMain::erreur(30);
+            ControllerMain::erreur("Il manque des informations");
         }
     }
 
@@ -234,10 +223,10 @@ class ControllerUser
                     require File::build_path(array('view', 'view.php'));
                 }
             } else {
-                ControllerMain::erreur(29);
+                ControllerMain::erreur("Les informations ne sont pas valide");
             }
         } else {
-            ControllerMain::erreur(28);
+            ControllerMain::erreur("Il manque des informations");
         }
     }
 

@@ -123,3 +123,9 @@ h1 {
     margin-top: 15px;
     text-align: center;
 }
+
+a.titre {
+    color: white;
+    text-decoration: none;
+}
+

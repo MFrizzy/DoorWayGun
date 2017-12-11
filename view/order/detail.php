@@ -4,23 +4,20 @@
         <thead>
             <tr>
                 <th class="mdl-data-table__cell--non-numeric">N° Commande</th>
-                <th class="mdl-data-table__cell--non-numeric">Utilisateur</th>
+                <?php if(isset($_SESSION['login']) && $_SESSION['is_admin']) echo '<th class="mdl-data-table__cell--non-numeric">Utilisateur</th><th></th>'?>
                 <th class="mdl-data-table__cell--non-numeric">Date</th>
                 <th class="mdl-data-table__cell--non-numeric">Etat</th>
                 <th class="mdl-data-table__cell--non-numeric">Adresse de livraison</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-                echo '<tr>
-                        <th><a href="index.php?controller=order&action=read&idOrder=' . $order->getIdOrder() . '">' . $order->getIdOrder() . '</a></th>
-                        <th><a href="index.php?controller=order&action=read&idUser=' . $order->getIdOrder() . '">' . $order->getIdUser() . '</a></th>
-                        <th>' . $order->getDate() . '</th>
-                        <th>' . $order->getState() . '</th>   
-                        <th class="mdl-data-table__cell--non-numeric">'.$order->getAdresseLivraison().'</th>                     
-                    </tr>
-            ';
-            ?>
+            <tr>
+                <th><?php echo $order->getIdOrder() ?></th>
+                <?php if(isset($_SESSION['login']) && $_SESSION['is_admin']) echo '<th>' . $order->getIdUser() . '</th><th><a href="index.php?controller=user&action=read&idUser=' . $order->getIdUser() . '"><i class="material-icons">expand_more</i></a></th>' ?>
+                <th><?php echo $order->getDate() ?></th>
+                <th><?php echo $order->getState()?></th>
+                <th class="mdl-data-table__cell--non-numeric"> <?php echo $order->getAdresseLivraison() ?></th>
+            </tr>
         </tbody>
     </table>
 

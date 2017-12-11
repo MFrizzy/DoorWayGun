@@ -33,9 +33,7 @@ class ControllerOrder
             $id = $_GET['idUser'];
             $tab = ModelOrder::selectByUser($id);
             if (count($tab) == 0) {
-                ControllerMain::erreur("T'as pas fait de commandes");
-            } else if ($tab == false) {
-                ControllerMain::erreur(53);
+                ControllerMain::erreur("Tu n'as pas fait de commandes");
             } else {
                 $view = 'list';
                 $pagetitle = 'Commandes de ' . $id;
@@ -46,8 +44,6 @@ class ControllerOrder
             $tab = ModelOrder::selectByUser($id);
             if (count($tab) == 0) {
                 ControllerMain::erreur("T'as pas fait de commandes");
-            } else if ($tab == false) {
-                ControllerMain::erreur(53);
             } else {
                 $view = 'list';
                 $pagetitle = 'Commandes de ' . $id;
