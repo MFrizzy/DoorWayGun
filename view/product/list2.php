@@ -18,7 +18,6 @@
                 <th>Price</th>
                 <th></th>
                 <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +29,6 @@
                         <th class="mdl-data-table__cell--non-numeric">' . htmlspecialchars($value->getProductName()) . '</th>
                         <th>' . htmlspecialchars($value->getPrice()) . '</th>
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=update&idProduct=' . htmlspecialchars($value->getIdProduct()) . '"><i class="material-icons">mode_edit</i></a></th>
-                        <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=updataImg&idProduct=' . htmlspecialchars($value->getIdProduct()) . '"><i class="material-icons">add_a_photo</i></a></th> 
                         <th class="mdl-data-table__cell--non-numeric"><a href="index.php?controller=product&action=delete&idProduct=' . htmlspecialchars($value->getIdProduct()) . '"><i class="material-icons">delete</i></a></th>
                     </tr>
                 ';
